@@ -1,0 +1,51 @@
+{
+  "name": "@design-system/web",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@auth/core": "0.35.3",
+    "@design-system/api": "workspace:*",
+    "@design-system/auth": "workspace:*",
+    "@design-system/config": "workspace:*",
+    "@design-system/db": "workspace:*",
+    "@design-system/emails": "workspace:*",
+    "@design-system/ui": "workspace:*",
+    "@design-system/utils": "workspace:*",
+    "@tanstack/react-query": "5.51.21",
+    "@trpc/client": "11.0.0-rc.572",
+    "@trpc/next": "11.0.0-rc.572",
+    "@trpc/react-query": "11.0.0-rc.572",
+    "@sentry/nextjs": "8.18.0",
+    "clsx": "2.1.1",
+    "lucide-react": "0.468.0",
+    "next": "15.0.0-canary.75",
+    "next-auth": "5.0.0-beta.25",
+    "posthog-js": "1.178.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-hook-form": "7.52.2",
+    "superjson": "2.2.1",
+    "tailwind-merge": "2.5.3",
+    "tailwindcss-animate": "1.0.7",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/lodash.merge": "4.6.7",
+    "@types/node": "22.5.4",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@types/next-auth": "3.15.0",
+    "autoprefixer": "10.4.20",
+    "eslint": "9.7.0",
+    "postcss": "8.4.41",
+    "tailwindcss": "3.4.9",
+    "typescript": "5.5.4"
+  }
+}

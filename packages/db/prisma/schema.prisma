@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String        @id @default(uuid())
+  email         String        @unique
+  name          String?
+  memberships   Membership[]
+  auditLogs     AuditLog[]    @relation("UserAuditLogs")
+  notifications Notification[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Organization {
+  id            String        @id @default(uuid())
+  name          String
+  slug          String        @unique
+  memberships   Membership[]
+  projects      Project[]
+  featureFlags  FeatureFlag[]
+  billing       Billing?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Membership {
+  id             String        @id @default(uuid())
+  user           User          @relation(fields: [userId], references: [id])
+  userId         String
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  organizationId String
+  role           String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model Project {
+  id             String        @id @default(uuid())
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  organizationId String
+  name           String
+  description    String?
+  auditLogs      AuditLog[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model FeatureFlag {
+  id             String        @id @default(uuid())
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  organizationId String
+  key            String
+  enabled        Boolean       @default(false)
+  description    String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@unique([organizationId, key])
+}
+
+model Billing {
+  id             String        @id @default(uuid())
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  organizationId String        @unique
+  stripeCustomer String
+  subscriptionId String?
+  plan           String        @default("starter")
+  seats          Int           @default(1)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  actor      User?    @relation("UserAuditLogs", fields: [actorId], references: [id])
+  actorId    String?
+  project    Project? @relation(fields: [projectId], references: [id])
+  projectId  String?
+  action     String
+  metadata   Json?
+  createdAt  DateTime @default(now())
+}
+
+model Notification {
+  id            String        @id @default(uuid())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        String
+  organization  Organization  @relation(fields: [organizationId], references: [id])
+  organizationId String
+  type          String
+  payload       Json
+  readAt        DateTime?
+  createdAt     DateTime      @default(now())
+}
+
+model AnalyticsEvent {
+  id            String        @id @default(uuid())
+  organization  Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
+  user          User?         @relation(fields: [userId], references: [id])
+  userId        String?
+  name          String
+  properties    Json
+  createdAt     DateTime      @default(now())
+}
+
+model OnboardingState {
+  id            String       @id @default(uuid())
+  organization  Organization @relation(fields: [organizationId], references: [id])
+  organizationId String      @unique
+  completed     Boolean      @default(false)
+  checklist     Json
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}

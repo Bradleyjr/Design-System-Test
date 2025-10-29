@@ -1,0 +1,33 @@
+{
+  "name": "@design-system/storybook",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build",
+    "lint": "eslint . --ext ts,tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@design-system/ui": "workspace:*",
+    "@storybook/nextjs": "8.1.10",
+    "@storybook/addon-a11y": "8.1.10",
+    "@storybook/addon-essentials": "8.1.10",
+    "@storybook/addon-interactions": "8.1.10",
+    "@storybook/testing-library": "0.2.2",
+    "next": "15.0.0-canary.75",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "storybook": "8.1.10"
+  },
+  "devDependencies": {
+    "@types/node": "22.5.4",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "autoprefixer": "10.4.20",
+    "eslint": "9.7.0",
+    "postcss": "8.4.41",
+    "tailwindcss": "3.4.9",
+    "typescript": "5.5.4"
+  }
+}
