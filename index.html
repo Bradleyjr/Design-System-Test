@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System Components</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="page-header">
+    <div class="page-header__content">
+      <h1>Design System Component Gallery</h1>
+      <p>Interactive gallery that showcases every component in the design system.</p>
+    </div>
+    <button class="button button--ghost" data-theme-toggle>
+      <span class="icon" aria-hidden="true">🌙</span>
+      <span>Toggle theme</span>
+    </button>
+  </header>
+
+  <main class="layout">
+    <nav class="toc" aria-label="Component sections">
+      <ul>
+        <li><a href="#buttons">Buttons</a></li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#selection">Selection controls</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+        <li><a href="#content">Content containers</a></li>
+        <li><a href="#navigation">Navigation</a></li>
+        <li><a href="#overlays">Overlays</a></li>
+        <li><a href="#utilities">Utilities</a></li>
+      </ul>
+    </nav>
+
+    <div class="component-sections">
+      <section id="buttons" class="component-section" aria-labelledby="buttons-title">
+        <div class="component-section__header">
+          <h2 id="buttons-title">Buttons</h2>
+          <p>Button variants cover the primary ways users start actions.</p>
+        </div>
+        <div class="component-grid">
+          <div class="component-card">
+            <h3>Primary</h3>
+            <button class="button">Primary button</button>
+          </div>
+          <div class="component-card">
+            <h3>Secondary</h3>
+            <button class="button button--secondary">Secondary button</button>
+          </div>
+          <div class="component-card">
+            <h3>Outline</h3>
+            <button class="button button--outline">Outline button</button>
+          </div>
+          <div class="component-card">
+            <h3>Destructive</h3>
+            <button class="button button--danger">Delete item</button>
+          </div>
+          <div class="component-card">
+            <h3>Icon</h3>
+            <button class="icon-button" aria-label="Add item">
+              <span class="icon" aria-hidden="true">＋</span>
+            </button>
+          </div>
+          <div class="component-card">
+            <h3>Split button</h3>
+            <div class="split-button" role="group" aria-label="Split button example">
+              <button class="button">Save</button>
+              <button class="button button--ghost" aria-haspopup="true" aria-expanded="false" data-split-menu>
+                <span class="icon" aria-hidden="true">▾</span>
+              </button>
+            </div>
+            <div class="menu" role="menu" hidden data-split-menu-list>
+              <button role="menuitem">Save draft</button>
+              <button role="menuitem">Save &amp; notify</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="inputs" class="component-section" aria-labelledby="inputs-title">
+        <div class="component-section__header">
+          <h2 id="inputs-title">Inputs</h2>
+          <p>Form inputs support data entry with clear affordances and messaging.</p>
+        </div>
+        <div class="component-grid">
+          <div class="component-card">
+            <h3>Text input</h3>
+            <label class="field">
+              <span class="field__label">Full name</span>
+              <input type="text" placeholder="Ada Lovelace" />
+              <span class="field__support">Enter your legal name.</span>
+            </label>
+          </div>
+          <div class="component-card">
+            <h3>Password input</h3>
+            <label class="field field--password">
+              <span class="field__label">Password</span>
+              <input type="password" placeholder="••••••••" />
+              <button type="button" class="field__action" data-password-toggle>Show</button>
+              <span class="field__support">At least 12 characters.</span>
+            </label>
+          </div>
+          <div class="component-card">
+            <h3>Textarea</h3>
+            <label class="field">
+              <span class="field__label">Project summary</span>
+              <textarea rows="3" placeholder="Share a brief overview..."></textarea>
+            </label>
+          </div>
+          <div class="component-card">
+            <h3>Select</h3>
+            <label class="field">
+              <span class="field__label">Role</span>
+              <div class="select">
+                <select>
+                  <option>Designer</option>
+                  <option>Engineer</option>
+                  <option>Product manager</option>
+                  <option>Researcher</option>
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="component-card">
+            <h3>Input with error</h3>
+            <label class="field field--error">
+              <span class="field__label">Email</span>
+              <input type="email" placeholder="you@example.com" value="not-an-email" />
+              <span class="field__support" role="alert">Email must contain @.</span>
+            </label>
+          </div>
+          <div class="component-card">
+            <h3>Range</h3>
+            <label class="field">
+              <span class="field__label">Volume</span>
+              <input type="range" min="0" max="100" value="40" />
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section id="selection" class="component-section" aria-labelledby="selection-title">
+        <div class="component-section__header">
+          <h2 id="selection-title">Selection controls</h2>
+          <p>Selection controls let users make choices with immediate feedback.</p>
+        </div>
+        <div class="component-grid">
+          <div class="component-card">
+            <h3>Checkbox group</h3>
+            <fieldset class="choice-group">
+              <legend class="choice-group__legend">Notifications</legend>
+              <label class="choice choice--checkbox"><input type="checkbox" checked /> Email</label>
+              <label class="choice choice--checkbox"><input type="checkbox" /> SMS</label>
+              <label class="choice choice--checkbox"><input type="checkbox" checked /> Push</label>
+            </fieldset>
+          </div>
+          <div class="component-card">
+            <h3>Radio group</h3>
+            <fieldset class="choice-group">
+              <legend class="choice-group__legend">Plan</legend>
+              <label class="choice choice--radio"><input type="radio" name="plan" checked /> Starter</label>
+              <label class="choice choice--radio"><input type="radio" name="plan" /> Growth</label>
+              <label class="choice choice--radio"><input type="radio" name="plan" /> Enterprise</label>
+            </fieldset>
+          </div>
+          <div class="component-card">
+            <h3>Switch</h3>
+            <label class="switch">
+              <input type="checkbox" checked />
+              <span class="switch__track" aria-hidden="true"></span>
+              <span class="switch__label">Enable automation</span>
+            </label>
+          </div>
+          <div class="component-card">
+            <h3>Segmented control</h3>
+            <div class="segmented" role="tablist" aria-label="View mode">
+              <button class="segmented__item is-active" role="tab" aria-selected="true">List</button>
+              <button class="segmented__item" role="tab">Board</button>
+              <button class="segmented__item" role="tab">Timeline</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="feedback" class="component-section" aria-labelledby="feedback-title">
+        <div class="component-section__header">
+          <h2 id="feedback-title">Feedback</h2>
+          <p>Feedback components communicate status and progress.</p>
+        </div>
+        <div class="component-grid">
+          <div class="component-card">
+            <h3>Badges</h3>
+            <div class="badge-row">
+              <span class="badge">New</span>
+              <span class="badge badge--accent">Beta</span>
+              <span class="badge badge--outline">Draft</span>
+              <span class="badge badge--success">Live</span>
+              <span class="badge badge--danger">Deprecated</span>
+            </div>
+          </div>
+          <div class="component-card">
+            <h3>Progress</h3>
+            <progress value="45" max="100" class="progress"></progress>
+            <div class="progress-label">45% Complete</div>
+          </div>
+          <div class="component-card">
+            <h3>Alert</h3>
+            <div class="alert" role="status">
+              <span class="icon" aria-hidden="true">ℹ️</span>
+              <div>
+                <h4 class="alert__title">New update available</h4>
+                <p>Version 2.1 introduces real-time collaboration and offline access.</p>
+              </div>
+            </div>
+          </div>
+          <div class="component-card">
+            <h3>Toast</h3>
+            <button class="button" data-toast-trigger>Show toast</button>
+            <div class="toast" role="status" hidden>
+              <span class="icon" aria-hidden="true">✅</span>
+              <span class="toast__message">Settings saved successfully.</span>
+              <button class="icon-button" aria-label="Close notification" data-toast-dismiss>✕</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="content" class="component-section" aria-labelledby="content-title">
+        <div class="component-section__header">
+          <h2 id="content-title">Content containers</h2>
+          <p>Containers provide structure for information and actions.</p>
+        </div>
+        <div class="component-grid">
+          <div class="component-card">
+            <h3>Card</h3>
+            <article class="card">
+              <header class="card__header">
+                <h4>Team velocity</h4>
+                <span class="badge badge--accent">42 pts</span>
+              </header>
+              <p>Track your squad's velocity with weekly snapshots and forecasts.</p>
+              <footer class="card__footer">
+                <button class="button button--ghost">View report</button>
+                <button class="button">Share</button>
+              </footer>
+            </article>
+          </div>
+          <div class="component-card">
+            <h3>Statistic</h3>
+            <div class="stat">
+              <div class="stat__label">Active projects</div>
+              <div class="stat__value">18</div>
+              <div class="stat__trend stat__trend--up">▲ 12% from last month</div>
+            </div>
+          </div>
+          <div class="component-card">
+            <h3>Avatar list</h3>
+            <div class="avatar-list">
+              <span class="avatar" aria-hidden="true">AL</span>
+              <span class="avatar" aria-hidden="true">GB</span>
+              <span class="avatar" aria-hidden="true">SW</span>
+              <span class="avatar" aria-hidden="true">TL</span>
+              <span class="avatar avatar--ghost" aria-label="More collaborators">+5</span>
+            </div>
+          </div>
+          <div class="component-card">
+            <h3>Data table</h3>
+            <div class="table-wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Assignee</th>
+                    <th scope="col">Due</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Billing integration</td>
+                    <td><span class="badge badge--success">On track</span></td>
+                    <td>Ada Lovelace</td>
+                    <td>Aug 08</td>
+                  </tr>
+                  <tr>
+                    <td>Design audit</td>
+                    <td><span class="badge badge--accent">Review</span></td>
+                    <td>Grace Hopper</td>
+                    <td>Aug 14</td>
+                  </tr>
+                  <tr>
+                    <td>Marketing site</td>
+                    <td><span class="badge badge--danger">Blocked</span></td>
+                    <td>Sunita Williams</td>
+                    <td>Aug 19</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="navigation" class="component-section" aria-labelledby="navigation-title">
+        <div class="component-section__header">
+          <h2 id="navigation-title">Navigation</h2>
+          <p>Navigation components help users understand where they are and where they can go.</p>
+        </div>
+        <div class="component-grid">
+          <div class="component-card">
+            <h3>Tabs</h3>
+            <div class="tabs" data-tabs>
+              <div class="tabs__list" role="tablist" aria-label="Profile sections">
+                <button role="tab" id="tab-profile" class="tabs__tab is-active" aria-selected="true" aria-controls="panel-profile">Profile</button>
+                <button role="tab" id="tab-teams" class="tabs__tab" aria-controls="panel-teams">Teams</button>
+                <button role="tab" id="tab-settings" class="tabs__tab" aria-controls="panel-settings">Settings</button>
+              </div>
+              <div class="tabs__panels">
+                <section id="panel-profile" class="tabs__panel is-active" role="tabpanel" aria-labelledby="tab-profile">
+                  <p>Manage your contact details and profile picture.</p>
+                </section>
+                <section id="panel-teams" class="tabs__panel" role="tabpanel" aria-labelledby="tab-teams">
+                  <p>Create and organize teams, assign roles, and invite members.</p>
+                </section>
+                <section id="panel-settings" class="tabs__panel" role="tabpanel" aria-labelledby="tab-settings">
+                  <p>Update preferences, security settings, and integrations.</p>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="component-card">
+            <h3>Breadcrumbs</h3>
+            <nav aria-label="Breadcrumb" class="breadcrumbs">
+              <ol>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Mobile app</a></li>
+                <li aria-current="page">Design system</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="component-card">
+            <h3>Pagination</h3>
+            <nav aria-label="Pagination" class="pagination">
+              <button class="button button--ghost" disabled>Prev</button>
+              <div class="pagination__pages">
+                <button class="pagination__page is-active" aria-current="page">1</button>
+                <button class="pagination__page">2</button>
+                <button class="pagination__page">3</button>
+                <span class="pagination__ellipsis" aria-hidden="true">…</span>
+                <button class="pagination__page">9</button>
+              </div>
+              <button class="button button--ghost">Next</button>
+            </nav>
+          </div>
+          <div class="component-card">
+            <h3>Stepper</h3>
+            <ol class="stepper">
+              <li class="stepper__step is-complete">
+                <span class="stepper__marker">1</span>
+                <span class="stepper__label">Details</span>
+              </li>
+              <li class="stepper__step is-active">
+                <span class="stepper__marker">2</span>
+                <span class="stepper__label">Configuration</span>
+              </li>
+              <li class="stepper__step">
+                <span class="stepper__marker">3</span>
+                <span class="stepper__label">Review</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="overlays" class="component-section" aria-labelledby="overlays-title">
+        <div class="component-section__header">
+          <h2 id="overlays-title">Overlays</h2>
+          <p>Overlay components surface important actions and information.</p>
+        </div>
+        <div class="component-grid">
+          <div class="component-card">
+            <h3>Modal</h3>
+            <button class="button" data-modal-open>Open modal</button>
+            <dialog class="modal" data-modal>
+              <form method="dialog" class="modal__content">
+                <header class="modal__header">
+                  <h4>Invite teammates</h4>
+                  <button class="icon-button" aria-label="Close" value="cancel">✕</button>
+                </header>
+                <p>Send collaborative invites to bring your teammates onboard.</p>
+                <label class="field">
+                  <span class="field__label">Email addresses</span>
+                  <textarea rows="2" placeholder="person@example.com"></textarea>
+                </label>
+                <footer class="modal__footer">
+                  <button class="button button--ghost" value="cancel">Cancel</button>
+                  <button class="button" value="confirm">Send invites</button>
+                </footer>
+              </form>
+            </dialog>
+          </div>
+          <div class="component-card">
+            <h3>Tooltip</h3>
+            <button class="button button--ghost tooltip" data-tooltip="Share this report with collaborators">Hover me</button>
+          </div>
+          <div class="component-card">
+            <h3>Popover</h3>
+            <button class="button" data-popover-trigger aria-expanded="false">Color picker ▾</button>
+            <div class="popover" role="dialog" hidden>
+              <header class="popover__header">Choose color</header>
+              <div class="popover__swatches">
+                <button class="swatch swatch--blue" aria-label="Ocean blue"></button>
+                <button class="swatch swatch--purple" aria-label="Royal purple"></button>
+                <button class="swatch swatch--green" aria-label="Fresh green"></button>
+                <button class="swatch swatch--yellow" aria-label="Sun yellow"></button>
+                <button class="swatch swatch--red" aria-label="Sunset red"></button>
+              </div>
+              <footer class="popover__footer">
+                <button class="button button--ghost" data-popover-close>Close</button>
+              </footer>
+            </div>
+          </div>
+          <div class="component-card">
+            <h3>Drawer</h3>
+            <button class="button" data-drawer-open>Open settings</button>
+            <aside class="drawer" aria-hidden="true" data-drawer>
+              <div class="drawer__scrim" data-drawer-close></div>
+              <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+                <header class="drawer__header">
+                  <h4 id="drawer-title">Workspace settings</h4>
+                  <button class="icon-button" aria-label="Close drawer" data-drawer-close>✕</button>
+                </header>
+                <div class="drawer__body">
+                  <label class="field">
+                    <span class="field__label">Workspace name</span>
+                    <input type="text" value="Saturn" />
+                  </label>
+                  <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="switch__track" aria-hidden="true"></span>
+                    <span class="switch__label">Enable weekly summary</span>
+                  </label>
+                </div>
+                <footer class="drawer__footer">
+                  <button class="button button--ghost" data-drawer-close>Cancel</button>
+                  <button class="button">Save changes</button>
+                </footer>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="utilities" class="component-section" aria-labelledby="utilities-title">
+        <div class="component-section__header">
+          <h2 id="utilities-title">Utilities</h2>
+          <p>Utility components support discovery, filtering, and inline help.</p>
+        </div>
+        <div class="component-grid">
+          <div class="component-card">
+            <h3>Search bar</h3>
+            <form class="search" role="search">
+              <span class="icon" aria-hidden="true">🔍</span>
+              <input type="search" placeholder="Search projects" />
+              <kbd class="search__shortcut">⌘K</kbd>
+            </form>
+          </div>
+          <div class="component-card">
+            <h3>Filters</h3>
+            <div class="filter-bar">
+              <button class="filter" aria-pressed="true">Active</button>
+              <button class="filter">Archived</button>
+              <button class="filter">Owned by me</button>
+              <button class="button button--ghost">Clear all</button>
+            </div>
+          </div>
+          <div class="component-card">
+            <h3>Inline help</h3>
+            <div class="inline-help">
+              <span class="icon" aria-hidden="true">❔</span>
+              <div>
+                <h4>Need assistance?</h4>
+                <p>Browse documentation or chat with support without leaving your workflow.</p>
+              </div>
+              <button class="button button--ghost">Open help center</button>
+            </div>
+          </div>
+          <div class="component-card">
+            <h3>Skeleton loader</h3>
+            <div class="skeleton-card">
+              <div class="skeleton skeleton--title"></div>
+              <div class="skeleton skeleton--line"></div>
+              <div class="skeleton skeleton--line"></div>
+              <div class="skeleton skeleton--button"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <p>Built with accessible, reusable components to accelerate product delivery.</p>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
