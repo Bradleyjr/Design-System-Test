@@ -1,0 +1,14 @@
+{
+  "extends": "./packages/config/tsconfig/base.json",
+  "compilerOptions": {
+    "paths": {
+      "@design-system/ui": ["./packages/ui/src"],
+      "@design-system/auth": ["./packages/auth/src"],
+      "@design-system/api": ["./packages/api/src"],
+      "@design-system/db": ["./packages/db/src"],
+      "@design-system/emails": ["./packages/emails/src"],
+      "@design-system/utils": ["./packages/utils/src"],
+      "@design-system/config/*": ["./packages/config/*"]
+    }
+  }
+}

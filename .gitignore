@@ -1,0 +1,13 @@
+node_modules
+.pnpm-store
+.next
+storybook-static
+coverage
+.env
+.env.local
+.env.development
+.env.test
+apps/**/.next
+apps/**/node_modules
+packages/**/node_modules
+Dockerfile
