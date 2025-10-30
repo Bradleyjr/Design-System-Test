@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SaaS UI Preview</title>
+    <style>
+      :root {
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        color-scheme: light dark;
+        --bg: #0b1620;
+        --fg: #f9fbfd;
+        --accent: #6ee7b7;
+        --muted: rgba(249, 251, 253, 0.65);
+        --surface: rgba(14, 24, 34, 0.7);
+        --border: rgba(255, 255, 255, 0.08);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #162c44 0%, #060b11 60%);
+        color: var(--fg);
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 64px 24px 96px;
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+      }
+
+      header {
+        text-align: center;
+        display: grid;
+        gap: 16px;
+      }
+
+      header h1 {
+        font-size: clamp(2.8rem, 5vw, 4rem);
+        margin: 0;
+        letter-spacing: -0.04em;
+      }
+
+      header p {
+        max-width: 720px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 1.1rem;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .btn {
+        border-radius: 999px;
+        padding: 12px 24px;
+        font-weight: 600;
+        border: 1px solid transparent;
+        transition: transform 160ms ease, box-shadow 160ms ease;
+        cursor: pointer;
+      }
+
+      .btn--primary {
+        background: linear-gradient(135deg, #34d399, #10b981);
+        color: #032b20;
+        box-shadow: 0 16px 32px rgba(16, 185, 129, 0.3);
+      }
+
+      .btn--ghost {
+        background: rgba(249, 251, 253, 0.05);
+        color: var(--fg);
+        border-color: var(--border);
+      }
+
+      .btn:focus-visible {
+        outline: 2px solid #6ee7b7;
+        outline-offset: 2px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 40px;
+        display: grid;
+        gap: 32px;
+        box-shadow: 0 32px 80px rgba(3, 12, 22, 0.45);
+      }
+
+      section header {
+        text-align: left;
+      }
+
+      section header h2 {
+        margin: 0;
+        font-size: 1.75rem;
+      }
+
+      section header p {
+        margin: 8px 0 0;
+        color: var(--muted);
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: rgba(8, 17, 27, 0.9);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 24px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 1.15rem;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .stack label {
+        display: grid;
+        gap: 6px;
+        font-weight: 500;
+      }
+
+      input,
+      select {
+        border-radius: 12px;
+        background: rgba(4, 10, 17, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px 14px;
+        color: inherit;
+        font: inherit;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+      }
+
+      .metric {
+        background: rgba(46, 64, 83, 0.4);
+        border-radius: 18px;
+        padding: 20px;
+        display: grid;
+        gap: 6px;
+      }
+
+      .metric span:first-child {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .metric strong {
+        font-size: 1.8rem;
+        letter-spacing: -0.03em;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+
+      thead {
+        background: rgba(255, 255, 255, 0.05);
+        text-align: left;
+      }
+
+      th,
+      td {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(110, 231, 183, 0.15);
+        color: #6ee7b7;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      footer {
+        text-align: center;
+        color: var(--muted);
+      }
+
+      @media (max-width: 720px) {
+        section {
+          padding: 28px;
+        }
+
+        .actions {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <p class="pill">Live SaaS UI Preview</p>
+        <h1>See the Experience in One Glance</h1>
+        <p>
+          A concise preview of the design system, highlighting hero messaging,
+          onboarding actions, KPI metrics, and a sample data table – everything a
+          stakeholder needs to visualize the product in seconds.
+        </p>
+        <div class="actions">
+          <button class="btn btn--primary">Start Free Trial</button>
+          <button class="btn btn--ghost">Schedule Demo</button>
+        </div>
+      </header>
+
+      <section aria-labelledby="journey-title">
+        <header>
+          <h2 id="journey-title">Customer Journey Snapshot</h2>
+          <p>
+            Capture core onboarding steps and input patterns customers complete
+            during activation.
+          </p>
+        </header>
+        <div class="cards">
+          <article class="card">
+            <h3>Account Setup</h3>
+            <p>Collect the essentials with crisp, friendly form controls.</p>
+            <div class="stack">
+              <label>
+                Workspace name
+                <input type="text" placeholder="Acme Collaboration" />
+              </label>
+              <label>
+                Industry focus
+                <select>
+                  <option>SaaS</option>
+                  <option>Fintech</option>
+                  <option>Healthcare</option>
+                  <option>Education</option>
+                </select>
+              </label>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Invite Team</h3>
+            <p>Showcase how collaborative onboarding looks and feels.</p>
+            <div class="stack">
+              <label>
+                Teammate email
+                <input type="email" placeholder="teammate@acme.io" />
+              </label>
+              <button class="btn btn--primary">Send Invite</button>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Secure Access</h3>
+            <p>Demonstrate a modern security gate with positive language.</p>
+            <div class="stack">
+              <label>
+                Verification code
+                <input type="text" placeholder="••••••" inputmode="numeric" />
+              </label>
+              <button class="btn btn--ghost">Resend</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="kpi-title">
+        <header>
+          <h2 id="kpi-title">Usage &amp; Health Metrics</h2>
+          <p>Realistic SaaS indicators that communicate product traction.</p>
+        </header>
+        <div class="metrics">
+          <article class="metric">
+            <span>Active Workspaces</span>
+            <strong>2,184</strong>
+            <span>+12.4% vs. last week</span>
+          </article>
+          <article class="metric">
+            <span>Automation Runs</span>
+            <strong>48,930</strong>
+            <span>Peak usage yesterday</span>
+          </article>
+          <article class="metric">
+            <span>Net Promoter Score</span>
+            <strong>54</strong>
+            <span>Customer love is climbing</span>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="pipeline-title">
+        <header>
+          <h2 id="pipeline-title">Revenue Pipeline</h2>
+          <p>Partner-ready deal table with stage, owner, and health cues.</p>
+        </header>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Account</th>
+              <th scope="col">Stage</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Forecast</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Northwind Logistics</td>
+              <td>
+                <span class="pill">Negotiation</span>
+              </td>
+              <td>Jess Walton</td>
+              <td>$128,400</td>
+            </tr>
+            <tr>
+              <td>Pioneer Analytics</td>
+              <td>
+                <span class="pill">Proposal</span>
+              </td>
+              <td>Akira Patel</td>
+              <td>$86,900</td>
+            </tr>
+            <tr>
+              <td>Emerald Systems</td>
+              <td>
+                <span class="pill">Discovery</span>
+              </td>
+              <td>Louis Chen</td>
+              <td>$42,750</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer>
+        <p>Crafted for product, marketing, and sales to preview the full story.</p>
+      </footer>
+    </div>
+  </body>
+</html>
