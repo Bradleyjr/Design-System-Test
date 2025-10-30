@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SaaS Design System Patterns</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero organism" role="banner">
+      <div class="hero__content">
+        <p class="eyebrow">Design System Showcase</p>
+        <h1>SaaS UI/UX Pattern Library</h1>
+        <p>
+          Explore atomic design building blocks that scale into cohesive SaaS
+          experiences. Use this page as a living catalog for strategy, product,
+          marketing, and platform teams to design consistent interfaces.
+        </p>
+        <div class="hero__actions">
+          <button class="btn btn--primary">Get Started</button>
+          <button class="btn btn--ghost" id="theme-toggle">Toggle Theme</button>
+        </div>
+      </div>
+      <nav class="hero__nav" aria-label="Primary">
+        <a href="#atoms">Atoms</a>
+        <a href="#molecules">Molecules</a>
+        <a href="#organisms">Organisms</a>
+        <a href="#templates">Templates</a>
+        <a href="#pages">Pages</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="atoms" class="section">
+        <header>
+          <p class="eyebrow">Foundations</p>
+          <h2>Atoms</h2>
+          <p>
+            The fundamental building blocks of the interface. These elements can
+            be used independently and combined into more complex components.
+          </p>
+        </header>
+        <div class="grid atoms-grid">
+          <article class="showcase-card">
+            <h3>Buttons</h3>
+            <p class="caption">Primary, secondary, ghost, and destructive.</p>
+            <div class="preview button-preview">
+              <button class="btn btn--primary">Primary</button>
+              <button class="btn btn--secondary">Secondary</button>
+              <button class="btn btn--ghost">Ghost</button>
+              <button class="btn btn--danger">Destructive</button>
+              <button class="btn btn--icon" aria-label="Add">
+                <span aria-hidden="true">+</span>
+              </button>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Form Inputs</h3>
+            <p class="caption">Text, password, select, and textarea atoms.</p>
+            <div class="preview form-preview">
+              <label>
+                <span>Email</span>
+                <input type="email" placeholder="team@acme.io" />
+              </label>
+              <label>
+                <span>Password</span>
+                <input type="password" placeholder="••••••••" />
+              </label>
+              <label>
+                <span>Role</span>
+                <select>
+                  <option>Product Manager</option>
+                  <option>Engineer</option>
+                  <option>Designer</option>
+                  <option>Marketer</option>
+                </select>
+              </label>
+              <label>
+                <span>Notes</span>
+                <textarea rows="3" placeholder="Share context..."></textarea>
+              </label>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Selection Controls</h3>
+            <p class="caption">Checkboxes, radio buttons, and toggles.</p>
+            <div class="preview selection-preview">
+              <label class="control control--checkbox">
+                <input type="checkbox" checked />
+                <span>Remember me</span>
+              </label>
+              <label class="control control--radio">
+                <input type="radio" name="plan" checked />
+                <span>Monthly</span>
+              </label>
+              <label class="control control--radio">
+                <input type="radio" name="plan" />
+                <span>Annual</span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" role="switch" />
+                <span class="toggle__slider" aria-hidden="true"></span>
+                <span class="toggle__label">Enable alerts</span>
+              </label>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Tags & Badges</h3>
+            <p class="caption">Status indicators for quick scanning.</p>
+            <div class="preview badge-preview">
+              <span class="badge badge--success">Active</span>
+              <span class="badge badge--warning">Pending</span>
+              <span class="badge badge--info">New feature</span>
+              <span class="badge badge--neutral">Draft</span>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Typography</h3>
+            <p class="caption">Heading scale, body, caption, and code.</p>
+            <div class="preview typography-preview">
+              <h1>Display / H1</h1>
+              <h2>Heading / H2</h2>
+              <h3>Subtitle / H3</h3>
+              <p>Body text that balances readability and density.</p>
+              <p class="caption">Caption for metadata and helper text.</p>
+              <code>const metrics = await fetchUsage();</code>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Surfaces</h3>
+            <p class="caption">Cards, sheets, modals, and tooltips.</p>
+            <div class="preview surface-preview">
+              <div class="card">Card Surface</div>
+              <div class="sheet">Sheet Surface</div>
+              <div class="modal" role="dialog" aria-modal="true">
+                <header>
+                  <h4>Modal Title</h4>
+                  <p class="caption">Used for critical decisions.</p>
+                </header>
+                <footer>
+                  <button class="btn btn--ghost">Cancel</button>
+                  <button class="btn btn--primary">Confirm</button>
+                </footer>
+              </div>
+              <div class="tooltip" role="tooltip">Tooltip message</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="molecules" class="section">
+        <header>
+          <p class="eyebrow">Assemblies</p>
+          <h2>Molecules</h2>
+          <p>
+            Purposeful combinations of atoms that deliver a focused action such
+            as signing in, creating an item, or scanning a notification.
+          </p>
+        </header>
+        <div class="grid molecules-grid">
+          <article class="showcase-card">
+            <h3>Sign-in Form</h3>
+            <p class="caption">Authentication entry point.</p>
+            <form class="preview form-stack" aria-label="Sign in">
+              <label>
+                Email
+                <input type="email" placeholder="alex@acme.io" />
+              </label>
+              <label class="password-field">
+                Password
+                <div class="input-with-action">
+                  <input type="password" placeholder="••••••" />
+                  <button type="button" class="btn btn--ghost">Show</button>
+                </div>
+              </label>
+              <div class="form-meta">
+                <label class="control control--checkbox">
+                  <input type="checkbox" checked />
+                  <span>Remember me</span>
+                </label>
+                <a href="#" class="link">Forgot password?</a>
+              </div>
+              <button type="submit" class="btn btn--primary">Sign in</button>
+            </form>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Search + Filters</h3>
+            <p class="caption">Combines inputs, chips, and sorting.</p>
+            <div class="preview search-filters">
+              <div class="input-with-action">
+                <span class="input-icon" aria-hidden="true">🔍</span>
+                <input type="search" placeholder="Search customers" />
+                <button class="btn btn--ghost">Save</button>
+              </div>
+              <div class="filter-chips">
+                <button class="chip chip--active">Enterprise</button>
+                <button class="chip">SMB</button>
+                <button class="chip">Trial</button>
+                <button class="chip">Churn risk</button>
+              </div>
+              <div class="sort-control">
+                <label>
+                  Sort by
+                  <select>
+                    <option>Lifecycle</option>
+                    <option>MRR</option>
+                    <option>Last seen</option>
+                  </select>
+                </label>
+                <button class="btn btn--ghost">Reset</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Metric Summary</h3>
+            <p class="caption">KPI cards with sparkline trend.</p>
+            <div class="preview kpi-cards">
+              <div class="kpi-card">
+                <div class="kpi-card__meta">
+                  <span class="badge badge--info">MRR</span>
+                  <button class="btn btn--icon" aria-label="More options">⋮</button>
+                </div>
+                <p class="kpi-card__value">$128k</p>
+                <p class="kpi-card__trend positive">▲ 8.1% vs last month</p>
+                <div class="sparkline" aria-hidden="true"></div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-card__meta">
+                  <span class="badge badge--info">Active Users</span>
+                  <button class="btn btn--icon" aria-label="More options">⋮</button>
+                </div>
+                <p class="kpi-card__value">18,492</p>
+                <p class="kpi-card__trend negative">▼ 1.9% vs last month</p>
+                <div class="sparkline sparkline--down" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Notification</h3>
+            <p class="caption">Alert banner with CTA.</p>
+            <div class="preview notification">
+              <div class="notification__content">
+                <h4>Usage limit nearing</h4>
+                <p>Upgrade to the Growth plan to unlock additional seats.</p>
+              </div>
+              <div class="notification__actions">
+                <button class="btn btn--ghost">Later</button>
+                <button class="btn btn--primary">Upgrade plan</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="organisms" class="section">
+        <header>
+          <p class="eyebrow">Structures</p>
+          <h2>Organisms</h2>
+          <p>
+            Complex UI regions that group molecules into purposeful flows such
+            as navigation, dashboards, or onboarding experiences.
+          </p>
+        </header>
+        <div class="grid organisms-grid">
+          <article class="showcase-card">
+            <h3>Dashboard Shell</h3>
+            <p class="caption">Responsive layout with sidebar navigation.</p>
+            <div class="preview dashboard-shell">
+              <aside class="sidebar">
+                <div class="sidebar__brand">Acme</div>
+                <nav>
+                  <a class="is-active" href="#">Overview</a>
+                  <a href="#">Customers</a>
+                  <a href="#">Billing</a>
+                  <a href="#">Automation</a>
+                  <a href="#">Settings</a>
+                </nav>
+                <div class="sidebar__footer">
+                  <button class="btn btn--ghost">Log out</button>
+                </div>
+              </aside>
+              <section class="dashboard-content">
+                <header>
+                  <h4>Overview</h4>
+                  <div class="actions">
+                    <button class="btn btn--ghost">Invite</button>
+                    <button class="btn btn--primary">New workflow</button>
+                  </div>
+                </header>
+                <div class="dashboard-grid">
+                  <div class="kpi-card">
+                    <p class="kpi-card__label">Active Projects</p>
+                    <p class="kpi-card__value">34</p>
+                    <p class="kpi-card__trend positive">▲ 4 new this week</p>
+                  </div>
+                  <div class="kpi-card">
+                    <p class="kpi-card__label">Net Retention</p>
+                    <p class="kpi-card__value">117%</p>
+                    <p class="kpi-card__trend positive">▲ +5% YoY</p>
+                  </div>
+                  <div class="activity-card">
+                    <h5>Recent activity</h5>
+                    <ul>
+                      <li><strong>Alex M.</strong> created automation "Churn rescue"</li>
+                      <li><strong>Harper</strong> added 25 users via CSV import</li>
+                      <li><strong>Billing</strong> processed invoice #4083</li>
+                    </ul>
+                  </div>
+                  <div class="chart-card">
+                    <h5>Pipeline coverage</h5>
+                    <div class="chart-placeholder" aria-hidden="true"></div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Marketing Hero</h3>
+            <p class="caption">Landing page hero for SaaS marketing.</p>
+            <div class="preview marketing-hero">
+              <div class="marketing-hero__content">
+                <p class="eyebrow">Automation Platform</p>
+                <h4>Scale customer success with unified insights</h4>
+                <p>
+                  Align product, revenue, and support teams with a shared system
+                  of record that turns signals into action.
+                </p>
+                <div class="hero-cta">
+                  <button class="btn btn--primary">Book a demo</button>
+                  <button class="btn btn--ghost">View pricing</button>
+                </div>
+                <div class="hero-proof">
+                  <span class="avatar-stack" aria-label="Customer logos">
+                    <span class="avatar">A</span>
+                    <span class="avatar">B</span>
+                    <span class="avatar">C</span>
+                    <span class="avatar">D</span>
+                  </span>
+                  <p>Trusted by 3,200+ modern teams</p>
+                </div>
+              </div>
+              <div class="marketing-hero__media">
+                <div class="browser-frame">
+                  <div class="browser-frame__top"></div>
+                  <div class="browser-frame__content">
+                    <div class="chart-placeholder" aria-hidden="true"></div>
+                    <div class="list-placeholder" aria-hidden="true"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Support Hub</h3>
+            <p class="caption">Knowledge base with contextual CTA.</p>
+            <div class="preview support-hub">
+              <aside>
+                <h4>Help Center</h4>
+                <nav>
+                  <a class="is-active" href="#">Getting started</a>
+                  <a href="#">Workspace management</a>
+                  <a href="#">Billing</a>
+                  <a href="#">Integrations</a>
+                </nav>
+              </aside>
+              <article>
+                <header>
+                  <h5>Getting started</h5>
+                  <p>Launch your workspace in minutes with these essentials.</p>
+                </header>
+                <ul class="support-list">
+                  <li>Invite teammates and set workspace permissions</li>
+                  <li>Create your first automation workflow</li>
+                  <li>Connect CRM, billing, and analytics integrations</li>
+                </ul>
+                <footer>
+                  <button class="btn btn--primary">Contact support</button>
+                  <button class="btn btn--ghost">Status page</button>
+                </footer>
+              </article>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="templates" class="section">
+        <header>
+          <p class="eyebrow">Layouts</p>
+          <h2>Templates</h2>
+          <p>
+            Page-level wireframes that highlight how organisms align into SaaS
+            journeys like onboarding, billing, and analytics.
+          </p>
+        </header>
+        <div class="grid templates-grid">
+          <article class="showcase-card">
+            <h3>Onboarding Checklist</h3>
+            <p class="caption">Guided setup for new workspaces.</p>
+            <div class="preview template onboarding">
+              <header>
+                <h4>Welcome to Acme</h4>
+                <p>Complete these steps to unlock automation insights.</p>
+              </header>
+              <ol>
+                <li class="is-complete">Connect your CRM</li>
+                <li class="is-active">Import usage data</li>
+                <li>Invite teammates</li>
+                <li>Build your first workflow</li>
+              </ol>
+              <footer>
+                <button class="btn btn--primary">Continue</button>
+                <button class="btn btn--ghost">Skip for now</button>
+              </footer>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Billing & Plans</h3>
+            <p class="caption">Pricing comparison with usage summary.</p>
+            <div class="preview template billing">
+              <header>
+                <h4>Manage subscription</h4>
+                <p>Track plan usage and upgrade when ready.</p>
+              </header>
+              <div class="plan-grid">
+                <div class="plan-card">
+                  <p class="badge badge--info">Current</p>
+                  <h5>Growth</h5>
+                  <p class="price">$89<span>/month</span></p>
+                  <ul>
+                    <li>10 seats included</li>
+                    <li>Workflow automation</li>
+                    <li>Email support</li>
+                  </ul>
+                  <button class="btn btn--ghost">Downgrade</button>
+                </div>
+                <div class="plan-card">
+                  <p class="badge badge--success">Recommended</p>
+                  <h5>Scale</h5>
+                  <p class="price">$149<span>/month</span></p>
+                  <ul>
+                    <li>Unlimited seats</li>
+                    <li>Advanced analytics</li>
+                    <li>Dedicated support</li>
+                  </ul>
+                  <button class="btn btn--primary">Upgrade</button>
+                </div>
+              </div>
+              <section class="usage">
+                <h6>Usage summary</h6>
+                <dl>
+                  <div>
+                    <dt>Workflows</dt>
+                    <dd>18 of 25 included</dd>
+                  </div>
+                  <div>
+                    <dt>Contacts</dt>
+                    <dd>42,110 of 50,000</dd>
+                  </div>
+                  <div>
+                    <dt>Automations</dt>
+                    <dd>5 premium add-ons</dd>
+                  </div>
+                </dl>
+              </section>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Analytics Overview</h3>
+            <p class="caption">Executive summary with charts.</p>
+            <div class="preview template analytics">
+              <header>
+                <h4>Revenue insights</h4>
+                <div class="filters">
+                  <label>
+                    Range
+                    <select>
+                      <option>Last 30 days</option>
+                      <option>Quarter to date</option>
+                      <option>Year to date</option>
+                    </select>
+                  </label>
+                  <button class="btn btn--ghost">Download</button>
+                </div>
+              </header>
+              <div class="analytics-grid">
+                <div class="chart-placeholder" aria-hidden="true"></div>
+                <div class="chart-placeholder" aria-hidden="true"></div>
+                <div class="table-placeholder" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="pages" class="section">
+        <header>
+          <p class="eyebrow">Experiences</p>
+          <h2>Page Patterns</h2>
+          <p>
+            Fully realized page experiences that combine templates, organisms,
+            molecules, and atoms to serve key SaaS use cases.
+          </p>
+        </header>
+        <div class="grid pages-grid">
+          <article class="showcase-card">
+            <h3>Product Dashboard</h3>
+            <p class="caption">Home base for daily product operations.</p>
+            <div class="preview page">
+              <div class="page__header">
+                <div>
+                  <h4>Workspace overview</h4>
+                  <p class="caption">Stay on top of performance and tasks.</p>
+                </div>
+                <div class="actions">
+                  <button class="btn btn--ghost">Customize</button>
+                  <button class="btn btn--primary">Create report</button>
+                </div>
+              </div>
+              <div class="page__body">
+                <div class="dashboard-grid">
+                  <div class="kpi-card">
+                    <p class="kpi-card__label">MRR</p>
+                    <p class="kpi-card__value">$128k</p>
+                    <p class="kpi-card__trend positive">▲ 8.1%</p>
+                  </div>
+                  <div class="activity-card">
+                    <h5>Tasks</h5>
+                    <ul>
+                      <li>Review NPS survey results</li>
+                      <li>Approve billing adjustments</li>
+                      <li>Publish roadmap update</li>
+                    </ul>
+                  </div>
+                  <div class="chart-card">
+                    <h5>Customer health</h5>
+                    <div class="chart-placeholder" aria-hidden="true"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Sales Workspace</h3>
+            <p class="caption">Account-focused workspace for reps.</p>
+            <div class="preview page">
+              <div class="page__header">
+                <div>
+                  <h4>Account: Northwind</h4>
+                  <p class="caption">Enterprise · $48k ARR · Renewals in 45 days</p>
+                </div>
+                <div class="actions">
+                  <button class="btn btn--ghost">Share</button>
+                  <button class="btn btn--primary">Log activity</button>
+                </div>
+              </div>
+              <div class="page__body">
+                <div class="split">
+                  <div class="pane">
+                    <h5>Timeline</h5>
+                    <ul class="timeline">
+                      <li><span>10:24</span> Demo completed with champion</li>
+                      <li><span>Yesterday</span> Pricing proposal sent</li>
+                      <li><span>Mon</span> Success plan shared</li>
+                    </ul>
+                  </div>
+                  <div class="pane">
+                    <h5>Stakeholders</h5>
+                    <ul class="stakeholders">
+                      <li>
+                        <span class="avatar">AL</span>
+                        <div>
+                          <strong>Alicia Ramos</strong>
+                          <p class="caption">VP Operations</p>
+                        </div>
+                        <button class="btn btn--ghost">Message</button>
+                      </li>
+                      <li>
+                        <span class="avatar">JM</span>
+                        <div>
+                          <strong>Jamal Lee</strong>
+                          <p class="caption">Head of IT</p>
+                        </div>
+                        <button class="btn btn--ghost">Message</button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <h3>Admin Settings</h3>
+            <p class="caption">Controls for workspace governance.</p>
+            <div class="preview page">
+              <div class="page__header">
+                <div>
+                  <h4>Workspace settings</h4>
+                  <p class="caption">Manage policies, permissions, and billing.</p>
+                </div>
+                <div class="actions">
+                  <button class="btn btn--ghost">Cancel</button>
+                  <button class="btn btn--primary">Save changes</button>
+                </div>
+              </div>
+              <div class="page__body settings">
+                <form class="settings-form">
+                  <label>
+                    Workspace name
+                    <input type="text" value="Acme Inc." />
+                  </label>
+                  <label>
+                    Domain
+                    <div class="input-with-action">
+                      <input type="text" value="acme" />
+                      <span class="suffix">.acmeapp.com</span>
+                    </div>
+                  </label>
+                  <fieldset>
+                    <legend>Security</legend>
+                    <label class="control control--checkbox">
+                      <input type="checkbox" checked />
+                      <span>Require MFA for all members</span>
+                    </label>
+                    <label class="control control--checkbox">
+                      <input type="checkbox" />
+                      <span>Restrict domains</span>
+                    </label>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer organism" role="contentinfo">
+      <div class="footer__content">
+        <p class="eyebrow">Keep building</p>
+        <h2>Extend the system</h2>
+        <p>
+          Pair this library with motion, voice & tone, accessibility, and data
+          visualization guidelines to deliver consistent SaaS experiences.
+        </p>
+      </div>
+      <div class="footer__actions">
+        <button class="btn btn--ghost">Download guidelines</button>
+        <button class="btn btn--primary">View changelog</button>
+      </div>
+    </footer>
+
+    <script src="theme.js" defer></script>
+  </body>
+</html>
