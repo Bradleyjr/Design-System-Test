@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key2 Consulting - Data Analytics Excellence</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        #root {
+            min-height: 100vh;
+        }
+
+        /* Loading indicator */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-size: 24px;
+            color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="loading">Loading Key2 Consulting Website...</div>
+    </div>
+
+    <script type="text/babel" data-type="module">
+        const { useState, useEffect, useRef } = React;
+
+        // ==================== TOKENS ====================
+        const colors = {
+            primary: {
+                50: '#EEF2FF', 100: '#E0E7FF', 200: '#C7D2FE', 300: '#A5B4FC',
+                400: '#818CF8', 500: '#6366F1', 600: '#4F46E5', 700: '#4338CA',
+                800: '#3730A3', 900: '#312E81'
+            },
+            secondary: {
+                50: '#FAF5FF', 100: '#F3E8FF', 200: '#E9D5FF', 300: '#D8B4FE',
+                400: '#C084FC', 500: '#A855F7', 600: '#9333EA', 700: '#7E22CE',
+                800: '#6B21A8', 900: '#581C87'
+            },
+            neutral: {
+                0: '#FFFFFF', 50: '#F9FAFB', 100: '#F3F4F6', 200: '#E5E7EB',
+                300: '#D1D5DB', 400: '#9CA3AF', 500: '#6B7280', 600: '#4B5563',
+                700: '#374151', 800: '#1F2937', 900: '#111827', 1000: '#000000'
+            },
+            success: {
+                50: '#F0FDF4', 100: '#DCFCE7', 200: '#BBF7D0', 300: '#86EFAC',
+                400: '#4ADE80', 500: '#22C55E', 600: '#16A34A', 700: '#15803D',
+                800: '#166534', 900: '#14532D'
+            },
+            error: {
+                50: '#FEF2F2', 100: '#FEE2E2', 200: '#FECACA', 300: '#FCA5A5',
+                400: '#F87171', 500: '#EF4444', 600: '#DC2626', 700: '#B91C1C',
+                800: '#991B1B', 900: '#7F1D1D'
+            },
+            warning: {
+                50: '#FFFBEB', 100: '#FEF3C7', 200: '#FDE68A', 300: '#FCD34D',
+                400: '#FBBF24', 500: '#F59E0B', 600: '#D97706', 700: '#B45309',
+                800: '#92400E', 900: '#78350F'
+            },
+            info: {
+                50: '#ECFEFF', 100: '#CFFAFE', 200: '#A5F3FC', 300: '#67E8F9',
+                400: '#22D3EE', 500: '#06B6D4', 600: '#0891B2', 700: '#0E7490',
+                800: '#155E75', 900: '#164E63'
+            }
+        };
+
+        const spacing = {
+            0: 0, 1: 4, 2: 8, 3: 12, 4: 16, 5: 20, 6: 24,
+            8: 32, 10: 40, 12: 48, 16: 64, 20: 80, 24: 96,
+            32: 128, 40: 160, 48: 192, 56: 224, 64: 256
+        };
+
+        const shadows = {
+            sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+            base: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+            md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+            '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+        };
+
+        // ==================== ATOMS ====================
+        const Button = ({ children, variant = 'primary', size = 'md', fullWidth, loading, disabled, leftIcon, rightIcon, style, ...props }) => {
+            const baseStyles = {
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: spacing[2],
+                fontWeight: 600,
+                borderRadius: '6px',
+                border: 'none',
+                cursor: disabled || loading ? 'not-allowed' : 'pointer',
+                transition: 'all 0.2s',
+                fontFamily: 'inherit',
+                opacity: disabled ? 0.6 : 1,
+                width: fullWidth ? '100%' : 'auto',
+                ...style
+            };
+
+            const sizeStyles = {
+                sm: { padding: `${spacing[2]}px ${spacing[3]}px`, fontSize: '14px' },
+                md: { padding: `${spacing[3]}px ${spacing[4]}px`, fontSize: '16px' },
+                lg: { padding: `${spacing[4]}px ${spacing[6]}px`, fontSize: '18px' }
+            };
+
+            const variantStyles = {
+                primary: {
+                    backgroundColor: colors.primary[600],
+                    color: 'white',
+                },
+                secondary: {
+                    backgroundColor: colors.secondary[600],
+                    color: 'white',
+                },
+                outline: {
+                    backgroundColor: 'transparent',
+                    color: colors.primary[600],
+                    border: `2px solid ${colors.primary[600]}`,
+                },
+                ghost: {
+                    backgroundColor: 'transparent',
+                    color: colors.primary[600],
+                },
+                danger: {
+                    backgroundColor: colors.error[600],
+                    color: 'white',
+                }
+            };
+
+            return (
+                <button
+                    style={{ ...baseStyles, ...sizeStyles[size], ...variantStyles[variant] }}
+                    disabled={disabled || loading}
+                    {...props}
+                >
+                    {leftIcon && <span>{leftIcon}</span>}
+                    {loading ? 'Loading...' : children}
+                    {rightIcon && <span>{rightIcon}</span>}
+                </button>
+            );
+        };
+
+        const Heading = ({ level, children, style, align = 'left', ...props }) => {
+            const Tag = `h${level}`;
+            const sizes = {
+                1: '48px', 2: '36px', 3: '30px',
+                4: '24px', 5: '20px', 6: '18px'
+            };
+
+            return React.createElement(Tag, {
+                style: {
+                    fontSize: sizes[level],
+                    fontWeight: 700,
+                    color: colors.neutral[900],
+                    lineHeight: 1.2,
+                    textAlign: align,
+                    ...style
+                },
+                ...props
+            }, children);
+        };
+
+        const Text = ({ children, as = 'p', size = 'base', weight = 'normal', color = 'default', align = 'left', style, ...props }) => {
+            const Tag = as;
+            const sizes = {
+                xs: '12px', sm: '14px', base: '16px',
+                lg: '18px', xl: '20px'
+            };
+            const weights = {
+                normal: 400, medium: 500,
+                semibold: 600, bold: 700
+            };
+            const colorMap = {
+                default: colors.neutral[900],
+                muted: colors.neutral[600],
+                primary: colors.primary[600],
+                success: colors.success[600],
+                error: colors.error[600],
+                warning: colors.warning[600]
+            };
+
+            return React.createElement(Tag, {
+                style: {
+                    fontSize: sizes[size],
+                    fontWeight: weights[weight],
+                    color: colorMap[color],
+                    lineHeight: 1.5,
+                    textAlign: align,
+                    ...style
+                },
+                ...props
+            }, children);
+        };
+
+        const Badge = ({ children, variant = 'default', size = 'md', dot, style }) => {
+            const sizeStyles = {
+                sm: { padding: `${spacing[1]}px ${spacing[2]}px`, fontSize: '12px' },
+                md: { padding: `${spacing[1]}px ${spacing[3]}px`, fontSize: '14px' },
+                lg: { padding: `${spacing[2]}px ${spacing[4]}px`, fontSize: '16px' }
+            };
+
+            const variantStyles = {
+                default: { backgroundColor: colors.neutral[100], color: colors.neutral[700] },
+                primary: { backgroundColor: colors.primary[100], color: colors.primary[700] },
+                success: { backgroundColor: colors.success[100], color: colors.success[700] },
+                error: { backgroundColor: colors.error[100], color: colors.error[700] },
+                warning: { backgroundColor: colors.warning[100], color: colors.warning[700] },
+                info: { backgroundColor: colors.info[100], color: colors.info[700] }
+            };
+
+            return (
+                <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    borderRadius: '12px',
+                    fontWeight: 600,
+                    ...sizeStyles[size],
+                    ...variantStyles[variant],
+                    ...style
+                }}>
+                    {children}
+                </span>
+            );
+        };
+
+        const Input = ({ size = 'md', error, fullWidth, leftIcon, rightIcon, style, ...props }) => {
+            const sizeStyles = {
+                sm: { padding: `${spacing[2]}px ${spacing[3]}px`, fontSize: '14px' },
+                md: { padding: `${spacing[3]}px ${spacing[4]}px`, fontSize: '16px' },
+                lg: { padding: `${spacing[4]}px ${spacing[5]}px`, fontSize: '18px' }
+            };
+
+            return (
+                <input
+                    style={{
+                        width: fullWidth ? '100%' : 'auto',
+                        border: `1px solid ${error ? colors.error[500] : colors.neutral[300]}`,
+                        borderRadius: '6px',
+                        fontFamily: 'inherit',
+                        transition: 'all 0.2s',
+                        outline: 'none',
+                        ...sizeStyles[size],
+                        ...style
+                    }}
+                    {...props}
+                />
+            );
+        };
+
+        const Textarea = ({ error, fullWidth, resize = 'vertical', style, ...props }) => {
+            return (
+                <textarea
+                    style={{
+                        width: fullWidth ? '100%' : 'auto',
+                        padding: `${spacing[3]}px ${spacing[4]}px`,
+                        fontSize: '16px',
+                        border: `1px solid ${error ? colors.error[500] : colors.neutral[300]}`,
+                        borderRadius: '6px',
+                        fontFamily: 'inherit',
+                        transition: 'all 0.2s',
+                        outline: 'none',
+                        resize: resize,
+                        minHeight: '120px',
+                        ...style
+                    }}
+                    {...props}
+                />
+            );
+        };
+
+        const Label = ({ children, required, htmlFor, style }) => {
+            return (
+                <label
+                    htmlFor={htmlFor}
+                    style={{
+                        display: 'block',
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        color: colors.neutral[700],
+                        marginBottom: spacing[2],
+                        ...style
+                    }}
+                >
+                    {children}
+                    {required && <span style={{ color: colors.error[500], marginLeft: spacing[1] }}>*</span>}
+                </label>
+            );
+        };
+
+        // ==================== MOLECULES ====================
+        const Card = ({ children, variant = 'default', padding = 'md', clickable, style, ...props }) => {
+            const paddingStyles = {
+                none: 0,
+                sm: spacing[4],
+                md: spacing[6],
+                lg: spacing[8]
+            };
+
+            const variantStyles = {
+                default: {
+                    backgroundColor: 'white',
+                    border: 'none',
+                    boxShadow: shadows.base
+                },
+                outlined: {
+                    backgroundColor: 'white',
+                    border: `1px solid ${colors.neutral[200]}`,
+                    boxShadow: 'none'
+                },
+                elevated: {
+                    backgroundColor: 'white',
+                    border: 'none',
+                    boxShadow: shadows.lg
+                }
+            };
+
+            return (
+                <div
+                    style={{
+                        borderRadius: '8px',
+                        padding: paddingStyles[padding],
+                        cursor: clickable ? 'pointer' : 'default',
+                        transition: 'all 0.2s',
+                        ...variantStyles[variant],
+                        ...style
+                    }}
+                    {...props}
+                >
+                    {children}
+                </div>
+            );
+        };
+
+        const CardHeader = ({ children, style }) => (
+            <div style={{ marginBottom: spacing[4], ...style }}>{children}</div>
+        );
+
+        const CardBody = ({ children, style }) => (
+            <div style={style}>{children}</div>
+        );
+
+        const FormField = ({ label, required, helperText, error, children, inputProps = {} }) => {
+            const id = `field-${Math.random().toString(36).substr(2, 9)}`;
+
+            return (
+                <div style={{ marginBottom: spacing[6] }}>
+                    <Label htmlFor={id} required={required}>
+                        {label}
+                    </Label>
+                    <Input id={id} error={!!error} fullWidth {...inputProps} />
+                    {error && (
+                        <Text size="sm" color="error" style={{ marginTop: spacing[1] }}>
+                            {error}
+                        </Text>
+                    )}
+                    {helperText && !error && (
+                        <Text size="sm" color="muted" style={{ marginTop: spacing[1] }}>
+                            {helperText}
+                        </Text>
+                    )}
+                </div>
+            );
+        };
+
+        // ==================== ORGANISMS ====================
+        const Header = ({ brand, navItems = [], actions, fixed }) => {
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+            return (
+                <header style={{
+                    position: fixed ? 'fixed' : 'relative',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    backgroundColor: 'white',
+                    borderBottom: `1px solid ${colors.neutral[200]}`,
+                    zIndex: 100
+                }}>
+                    <nav style={{
+                        maxWidth: '1280px',
+                        margin: '0 auto',
+                        padding: `${spacing[4]}px ${spacing[6]}px`,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+                        <div style={{ fontSize: '24px', fontWeight: 700 }}>
+                            {brand}
+                        </div>
+                        <div style={{ display: 'flex', gap: spacing[8], alignItems: 'center' }}>
+                            {navItems.map((item, i) => (
+                                <a
+                                    key={i}
+                                    href={item.href}
+                                    style={{
+                                        color: colors.neutral[700],
+                                        textDecoration: 'none',
+                                        fontWeight: 500,
+                                        transition: 'color 0.2s'
+                                    }}
+                                >
+                                    {item.label}
+                                </a>
+                            ))}
+                            {actions}
+                        </div>
+                    </nav>
+                </header>
+            );
+        };
+
+        const Footer = ({ sections = [], copyright, socialLinks = [] }) => {
+            return (
+                <footer style={{
+                    backgroundColor: colors.neutral[900],
+                    color: 'white',
+                    padding: `${spacing[16]}px ${spacing[6]}px`
+                }}>
+                    <div style={{
+                        maxWidth: '1280px',
+                        margin: '0 auto'
+                    }}>
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                            gap: spacing[8],
+                            marginBottom: spacing[12]
+                        }}>
+                            {sections.map((section, i) => (
+                                <div key={i}>
+                                    <Heading level={5} style={{ color: 'white', marginBottom: spacing[4] }}>
+                                        {section.title}
+                                    </Heading>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: spacing[3] }}>
+                                        {section.links.map((link, j) => (
+                                            <a
+                                                key={j}
+                                                href={link.href}
+                                                style={{
+                                                    color: colors.neutral[400],
+                                                    textDecoration: 'none',
+                                                    transition: 'color 0.2s'
+                                                }}
+                                            >
+                                                {link.label}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div style={{
+                            borderTop: `1px solid ${colors.neutral[800]}`,
+                            paddingTop: spacing[8],
+                            textAlign: 'center'
+                        }}>
+                            <Text style={{ color: colors.neutral[400] }}>
+                                {copyright}
+                            </Text>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        const Hero = ({ title, subtitle, actions, size = 'lg', align = 'center' }) => {
+            const sizeStyles = {
+                md: { padding: `${spacing[20]}px ${spacing[6]}px` },
+                lg: { padding: `${spacing[32]}px ${spacing[6]}px` }
+            };
+
+            return (
+                <section style={{
+                    ...sizeStyles[size],
+                    textAlign: align,
+                    background: `linear-gradient(135deg, ${colors.primary[50]} 0%, ${colors.secondary[50]} 100%)`
+                }}>
+                    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                        <Heading level={1} style={{ marginBottom: spacing[6], fontSize: '56px' }}>
+                            {title}
+                        </Heading>
+                        {subtitle && (
+                            <Text size="xl" color="muted" style={{ marginBottom: spacing[8] }}>
+                                {subtitle}
+                            </Text>
+                        )}
+                        {actions && <div>{actions}</div>}
+                    </div>
+                </section>
+            );
+        };
+
+        const ContactForm = ({ onSubmit }) => {
+            const [formData, setFormData] = useState({
+                name: '',
+                email: '',
+                company: '',
+                phone: '',
+                message: ''
+            });
+            const [loading, setLoading] = useState(false);
+            const [submitted, setSubmitted] = useState(false);
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setLoading(true);
+                await onSubmit(formData);
+                setLoading(false);
+                setSubmitted(true);
+                setTimeout(() => setSubmitted(false), 5000);
+            };
+
+            return (
+                <form onSubmit={handleSubmit}>
+                    <div style={{ marginBottom: spacing[4] }}>
+                        <Label htmlFor="name" required>Name</Label>
+                        <Input
+                            id="name"
+                            fullWidth
+                            required
+                            value={formData.name}
+                            onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        />
+                    </div>
+                    <div style={{ marginBottom: spacing[4] }}>
+                        <Label htmlFor="email" required>Email</Label>
+                        <Input
+                            id="email"
+                            type="email"
+                            fullWidth
+                            required
+                            value={formData.email}
+                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        />
+                    </div>
+                    <div style={{ marginBottom: spacing[4] }}>
+                        <Label htmlFor="company">Company</Label>
+                        <Input
+                            id="company"
+                            fullWidth
+                            value={formData.company}
+                            onChange={(e) => setFormData({...formData, company: e.target.value})}
+                        />
+                    </div>
+                    <div style={{ marginBottom: spacing[4] }}>
+                        <Label htmlFor="phone">Phone</Label>
+                        <Input
+                            id="phone"
+                            type="tel"
+                            fullWidth
+                            value={formData.phone}
+                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        />
+                    </div>
+                    <div style={{ marginBottom: spacing[6] }}>
+                        <Label htmlFor="message" required>Message</Label>
+                        <Textarea
+                            id="message"
+                            fullWidth
+                            required
+                            value={formData.message}
+                            onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        />
+                    </div>
+                    {submitted && (
+                        <div style={{
+                            padding: spacing[4],
+                            backgroundColor: colors.success[50],
+                            color: colors.success[700],
+                            borderRadius: '6px',
+                            marginBottom: spacing[4]
+                        }}>
+                            Thank you! We'll be in touch soon.
+                        </div>
+                    )}
+                    <Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+                        Send Message
+                    </Button>
+                </form>
+            );
+        };
+
+        const MainLayout = ({ headerProps, footerProps, children }) => {
+            return (
+                <>
+                    <Header {...headerProps} />
+                    <main style={{ paddingTop: '80px' }}>
+                        {children}
+                    </main>
+                    <Footer {...footerProps} />
+                </>
+            );
+        };
+
+        // ==================== KEY2 CONSULTING PAGES ====================
+        const HomePage = () => {
+            const headerProps = {
+                brand: (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{
+                            fontSize: '24px',
+                            fontWeight: 700,
+                            background: `linear-gradient(135deg, ${colors.primary[600]} 0%, ${colors.secondary[600]} 100%)`,
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text'
+                        }}>
+                            Key2 Consulting
+                        </span>
+                    </div>
+                ),
+                navItems: [
+                    { label: 'Home', href: '#home' },
+                    { label: 'Services', href: '#services' },
+                    { label: 'About', href: '#about' },
+                    { label: 'Contact', href: '#contact' }
+                ],
+                actions: <Button variant="primary" size="md">Get Started</Button>
+            };
+
+            const footerProps = {
+                sections: [
+                    {
+                        title: 'Services',
+                        links: [
+                            { label: 'Data Warehousing', href: '#services' },
+                            { label: 'Business Intelligence', href: '#services' },
+                            { label: 'Data Integration', href: '#services' },
+                            { label: 'Custom Applications', href: '#services' }
+                        ]
+                    },
+                    {
+                        title: 'Company',
+                        links: [
+                            { label: 'About Us', href: '#about' },
+                            { label: 'Careers', href: '#careers' },
+                            { label: 'Contact', href: '#contact' }
+                        ]
+                    }
+                ],
+                copyright: '© 2024 Key2 Consulting. All rights reserved.'
+            };
+
+            const services = [
+                {
+                    title: 'Data Warehousing',
+                    description: 'Custom-designed data warehouse systems that consolidate and organize data from multiple sources for comprehensive reporting and analysis.',
+                    icon: '📊',
+                    color: colors.primary[600]
+                },
+                {
+                    title: 'Business Intelligence',
+                    description: 'Transform your data into actionable insights with powerful dashboards and reports that drive informed business decision-making.',
+                    icon: '💡',
+                    color: colors.secondary[600]
+                },
+                {
+                    title: 'Data Integration',
+                    description: 'Seamlessly harness data from disparate sources to create a unified platform for reliable corporate intelligence and analytics.',
+                    icon: '🔗',
+                    color: colors.info[600]
+                },
+                {
+                    title: 'Custom Applications',
+                    description: 'Tailored software solutions that address your unique business challenges and maximize your data return on investment.',
+                    icon: '⚙️',
+                    color: colors.success[600]
+                }
+            ];
+
+            return (
+                <MainLayout headerProps={headerProps} footerProps={footerProps}>
+                    <Hero
+                        title="Maximize Your Data Analytics"
+                        subtitle="Transform raw data into strategic business insights with Microsoft's premier analytics partner"
+                        size="lg"
+                        align="center"
+                        actions={
+                            <div style={{ display: 'flex', gap: spacing[4], justifyContent: 'center', flexWrap: 'wrap' }}>
+                                <Button variant="primary" size="lg">Start Your Project</Button>
+                                <Button variant="outline" size="lg">Learn More</Button>
+                            </div>
+                        }
+                    />
+
+                    <section style={{ padding: `${spacing[12]}px ${spacing[6]}px`, backgroundColor: colors.neutral[50], textAlign: 'center' }}>
+                        <Badge variant="primary" size="lg">🏆 Microsoft Gold-Certified Partner</Badge>
+                        <Text size="lg" color="muted" align="center" style={{ marginTop: spacing[4], maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
+                            Specializing in Azure, Power BI, and SQL Server to deliver world-class data solutions
+                        </Text>
+                    </section>
+
+                    <section style={{
+                        padding: `${spacing[16]}px ${spacing[6]}px`,
+                        background: `linear-gradient(135deg, ${colors.primary[600]} 0%, ${colors.secondary[700]} 100%)`
+                    }}>
+                        <div style={{
+                            maxWidth: '1200px',
+                            margin: '0 auto',
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                            gap: spacing[8]
+                        }}>
+                            {[
+                                { value: '20+', label: 'Years of Excellence' },
+                                { value: '40+', label: 'Expert Consultants' },
+                                { value: '100+', label: 'Successful Projects' },
+                                { value: 'Top 1%', label: 'Microsoft Partners' }
+                            ].map((stat, index) => (
+                                <div key={index} style={{ textAlign: 'center' }}>
+                                    <Heading level={2} style={{ color: 'white', fontSize: '48px', marginBottom: spacing[2] }}>
+                                        {stat.value}
+                                    </Heading>
+                                    <Text size="lg" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                                        {stat.label}
+                                    </Text>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <section id="services" style={{ padding: `${spacing[20]}px ${spacing[6]}px` }}>
+                        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                            <div style={{ textAlign: 'center', marginBottom: spacing[12] }}>
+                                <Heading level={2} style={{ marginBottom: spacing[4] }}>Our Core Services</Heading>
+                                <Text size="xl" color="muted">Comprehensive data analytics solutions tailored to your business needs</Text>
+                            </div>
+                            <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                                gap: spacing[6]
+                            }}>
+                                {services.map((service, index) => (
+                                    <Card key={index} variant="elevated" clickable style={{ height: '100%' }}>
+                                        <CardHeader>
+                                            <div style={{ fontSize: '48px', marginBottom: spacing[4] }}>{service.icon}</div>
+                                            <Heading level={3} style={{ marginBottom: spacing[3] }}>{service.title}</Heading>
+                                        </CardHeader>
+                                        <CardBody>
+                                            <Text color="muted">{service.description}</Text>
+                                        </CardBody>
+                                    </Card>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section style={{
+                        padding: `${spacing[20]}px ${spacing[6]}px`,
+                        background: `linear-gradient(135deg, ${colors.primary[600]} 0%, ${colors.secondary[700]} 100%)`,
+                        textAlign: 'center'
+                    }}>
+                        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                            <Heading level={2} style={{ color: 'white', marginBottom: spacing[6] }}>
+                                Ready to Transform Your Data?
+                            </Heading>
+                            <Text size="xl" style={{ color: 'rgba(255, 255, 255, 0.9)', marginBottom: spacing[8] }}>
+                                Let's discuss how we can help you maximize your data analytics ROI and drive better business decisions.
+                            </Text>
+                            <div style={{ display: 'flex', gap: spacing[4], justifyContent: 'center', flexWrap: 'wrap' }}>
+                                <Button variant="secondary" size="lg" style={{ backgroundColor: 'white', color: colors.primary[600], border: 'none' }}>
+                                    Schedule a Consultation
+                                </Button>
+                                <Button variant="outline" size="lg" style={{ borderColor: 'white', color: 'white' }}>
+                                    View Case Studies
+                                </Button>
+                            </div>
+                        </div>
+                    </section>
+                </MainLayout>
+            );
+        };
+
+        // ==================== APP ====================
+        const App = () => {
+            return <HomePage />;
+        };
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
