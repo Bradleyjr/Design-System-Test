@@ -1,0 +1,100 @@
+.ds-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid #e0e0e0;
+}
+
+.ds-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: white;
+}
+
+.ds-table__header-cell {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #424242;
+  background-color: #f5f5f5;
+  border-bottom: 2px solid #e0e0e0;
+  white-space: nowrap;
+}
+
+.ds-table__row {
+  transition: background-color 0.15s ease;
+}
+
+.ds-table__cell {
+  padding: 0.75rem 1rem;
+  color: #212121;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Variants */
+.ds-table--striped .ds-table__row:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.ds-table--bordered .ds-table__cell,
+.ds-table--bordered .ds-table__header-cell {
+  border: 1px solid #e0e0e0;
+}
+
+/* States */
+.ds-table--hoverable .ds-table__row:hover {
+  background-color: #f5f5f5;
+}
+
+.ds-table--clickable .ds-table__row {
+  cursor: pointer;
+}
+
+.ds-table--compact .ds-table__header-cell,
+.ds-table--compact .ds-table__cell {
+  padding: 0.5rem 0.75rem;
+}
+
+/* Loading state */
+.ds-table-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+  color: #757575;
+}
+
+.ds-table-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid #e0e0e0;
+  border-top-color: #2196f3;
+  border-radius: 50%;
+  animation: ds-table-spin 0.8s linear infinite;
+}
+
+@keyframes ds-table-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty state */
+.ds-table-empty {
+  padding: 3rem;
+  text-align: center;
+  color: #757575;
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ds-table__header-cell,
+  .ds-table__cell {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+}

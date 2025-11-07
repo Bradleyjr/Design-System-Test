@@ -1,0 +1,38 @@
+.ds-breadcrumbs {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.ds-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ds-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ds-breadcrumbs__link {
+  font-size: 0.875rem;
+}
+
+.ds-breadcrumbs__text {
+  font-size: 0.875rem;
+  color: #757575;
+}
+
+.ds-breadcrumbs__text--current {
+  color: #424242;
+  font-weight: 500;
+}
+
+.ds-breadcrumbs__separator {
+  color: #bdbdbd;
+  user-select: none;
+}

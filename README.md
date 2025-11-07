@@ -77,20 +77,32 @@ src/
 
 ## Components
 
-### Atoms
+**34+ Total Components** across all atomic design levels
+
+### Design Tokens (8 categories)
+- Colors, Typography, Spacing, Shadows, Border Radius, Breakpoints, Animations, Z-Index
+
+### Atoms (12 components)
 - Button, Input, Label, Heading, Text, Link
+- Checkbox, Radio, Textarea, Spinner, Avatar, Divider
 
-### Molecules
+### Molecules (10 components)
 - FormField, Card, Badge, Alert, SearchBar
+- Select, Tooltip, Pagination, Breadcrumbs, ProgressBar
 
-### Organisms
+### Organisms (6 components)
 - Header, Footer, Hero, ContactForm
+- Modal, Table
 
-### Templates
+### Templates (3 layouts)
 - MainLayout, DashboardLayout, AuthLayout
 
-### Pages
+### Pages (3 examples)
 - HomePage, DashboardPage, LoginPage
+
+---
+
+**✨ New in v1.1:** Added 13 new components including Checkbox, Radio, Textarea, Spinner, Avatar, Divider, Select, Tooltip, Pagination, Breadcrumbs, ProgressBar, Modal, and Table. See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ## Technology Stack
 

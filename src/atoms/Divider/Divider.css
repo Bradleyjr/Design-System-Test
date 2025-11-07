@@ -1,0 +1,47 @@
+.ds-divider {
+  border: none;
+  background-color: #e0e0e0;
+}
+
+.ds-divider--horizontal {
+  width: 100%;
+  height: 1px;
+  margin: 1.5rem 0;
+}
+
+.ds-divider--vertical {
+  width: 1px;
+  height: 100%;
+  margin: 0 1.5rem;
+  display: inline-block;
+}
+
+/* Divider with label */
+.ds-divider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.ds-divider-wrapper .ds-divider {
+  margin: 0;
+  flex: 1;
+}
+
+.ds-divider__label {
+  color: #757575;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Label positions */
+.ds-divider-wrapper--left .ds-divider:first-child {
+  flex: 0 0 2rem;
+}
+
+.ds-divider-wrapper--right .ds-divider:last-child {
+  flex: 0 0 2rem;
+}
