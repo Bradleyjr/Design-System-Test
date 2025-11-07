@@ -56,6 +56,15 @@ function App() {
 }
 ```
 
+## 🎨 Preview Showcase
+
+View all components in your browser:
+
+- **[showcase-extended.html](showcase-extended.html)** - Complete showcase with all 34+ components (v1.1)
+- **[showcase.html](showcase.html)** - Original showcase with core components (v1.0)
+
+Simply open either HTML file in your web browser to see interactive examples of all components with live demos, hover effects, and working interactions!
+
 ## Documentation
 
 - **[Quick Start Guide](QUICK_START.md)** - Get started in minutes
@@ -77,20 +86,32 @@ src/
 
 ## Components
 
-### Atoms
+**34+ Total Components** across all atomic design levels
+
+### Design Tokens (8 categories)
+- Colors, Typography, Spacing, Shadows, Border Radius, Breakpoints, Animations, Z-Index
+
+### Atoms (12 components)
 - Button, Input, Label, Heading, Text, Link
+- Checkbox, Radio, Textarea, Spinner, Avatar, Divider
 
-### Molecules
+### Molecules (10 components)
 - FormField, Card, Badge, Alert, SearchBar
+- Select, Tooltip, Pagination, Breadcrumbs, ProgressBar
 
-### Organisms
+### Organisms (6 components)
 - Header, Footer, Hero, ContactForm
+- Modal, Table
 
-### Templates
+### Templates (3 layouts)
 - MainLayout, DashboardLayout, AuthLayout
 
-### Pages
+### Pages (3 examples)
 - HomePage, DashboardPage, LoginPage
+
+---
+
+**✨ New in v1.1:** Added 13 new components including Checkbox, Radio, Textarea, Spinner, Avatar, Divider, Select, Tooltip, Pagination, Breadcrumbs, ProgressBar, Modal, and Table. See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ## Technology Stack
 

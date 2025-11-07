@@ -9,3 +9,5 @@ export * from './spacing';
 export * from './shadows';
 export * from './breakpoints';
 export * from './borderRadius';
+export * from './animations';
+export * from './zIndex';

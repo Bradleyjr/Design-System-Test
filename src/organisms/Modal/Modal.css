@@ -1,0 +1,140 @@
+.ds-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: ds-modal-fade-in 0.2s ease-out;
+}
+
+@keyframes ds-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ds-modal {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-height: calc(100vh - 2rem);
+  display: flex;
+  flex-direction: column;
+  animation: ds-modal-slide-up 0.3s ease-out;
+}
+
+@keyframes ds-modal-slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Sizes */
+.ds-modal--sm {
+  width: 100%;
+  max-width: 400px;
+}
+
+.ds-modal--md {
+  width: 100%;
+  max-width: 600px;
+}
+
+.ds-modal--lg {
+  width: 100%;
+  max-width: 800px;
+}
+
+.ds-modal--xl {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.ds-modal--full {
+  width: calc(100vw - 2rem);
+  height: calc(100vh - 2rem);
+  max-width: none;
+}
+
+.ds-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.ds-modal__title {
+  margin: 0;
+}
+
+.ds-modal__close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #757575;
+  cursor: pointer;
+  padding: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.ds-modal__close:hover {
+  background-color: #f5f5f5;
+  color: #424242;
+}
+
+.ds-modal__close:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.3);
+}
+
+.ds-modal__content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.ds-modal__footer {
+  padding: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .ds-modal {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .ds-modal--full {
+    border-radius: 0;
+    height: 100vh;
+  }
+}
