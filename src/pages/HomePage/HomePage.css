@@ -1,0 +1,31 @@
+.home-page__features {
+  padding: 4rem 0;
+  background-color: #fafafa;
+}
+
+.home-page__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.home-page__section-title {
+  margin-bottom: 3rem;
+}
+
+.home-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.home-page__feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .home-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

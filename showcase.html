@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Design System - Component Showcase</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #212121;
+            background-color: #fafafa;
+        }
+
+        /* Showcase Layout */
+        .showcase {
+            min-height: 100vh;
+        }
+
+        .showcase-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .showcase-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .showcase-header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        .showcase-nav {
+            background: white;
+            border-bottom: 2px solid #e0e0e0;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .showcase-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 0 1.5rem;
+        }
+
+        .showcase-nav a {
+            color: #757575;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .showcase-nav a:hover {
+            background-color: #e3f2fd;
+            color: #2196f3;
+        }
+
+        .showcase-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .showcase-section {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .showcase-section h2 {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+            color: #2196f3;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .showcase-section h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: #424242;
+        }
+
+        .showcase-section p {
+            color: #757575;
+            margin-bottom: 1.5rem;
+        }
+
+        .component-demo {
+            background: #f5f5f5;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .component-label {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #757575;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Import all component styles from the design system */
+
+        /* Button Styles */
+        .ds-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            font-weight: 500;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            line-height: 1.5;
+        }
+
+        .ds-button:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.3);
+        }
+
+        .ds-button--sm { padding: 0.375rem 0.75rem; font-size: 0.875rem; }
+        .ds-button--md { padding: 0.5rem 1rem; font-size: 1rem; }
+        .ds-button--lg { padding: 0.75rem 1.5rem; font-size: 1.125rem; }
+
+        .ds-button--primary { background-color: #2196f3; color: white; }
+        .ds-button--primary:hover { background-color: #1976d2; }
+
+        .ds-button--secondary { background-color: #9c27b0; color: white; }
+        .ds-button--secondary:hover { background-color: #7b1fa2; }
+
+        .ds-button--outline { background-color: transparent; border: 2px solid #2196f3; color: #2196f3; }
+        .ds-button--outline:hover { background-color: #e3f2fd; }
+
+        .ds-button--ghost { background-color: transparent; color: #2196f3; }
+        .ds-button--ghost:hover { background-color: #e3f2fd; }
+
+        .ds-button--danger { background-color: #f44336; color: white; }
+        .ds-button--danger:hover { background-color: #d32f2f; }
+
+        /* Input Styles */
+        .ds-input-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .ds-input {
+            font-family: inherit;
+            width: 100%;
+            border: 1px solid #e0e0e0;
+            border-radius: 0.375rem;
+            background-color: white;
+            color: #212121;
+            transition: all 0.2s ease-in-out;
+            padding: 0.5rem 0.75rem;
+            font-size: 1rem;
+        }
+
+        .ds-input:focus {
+            outline: none;
+            border-color: #2196f3;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+
+        /* Label Styles */
+        .ds-label {
+            display: inline-block;
+            font-weight: 500;
+            color: #424242;
+            margin-bottom: 0.375rem;
+            font-size: 1rem;
+        }
+
+        .ds-label__required {
+            color: #f44336;
+            margin-left: 0.25rem;
+        }
+
+        /* Heading Styles */
+        .ds-heading {
+            font-weight: 700;
+            color: #212121;
+            line-height: 1.25;
+            margin: 0;
+        }
+
+        .ds-heading--1 { font-size: 3rem; }
+        .ds-heading--2 { font-size: 2.25rem; }
+        .ds-heading--3 { font-size: 1.875rem; }
+        .ds-heading--4 { font-size: 1.5rem; }
+        .ds-heading--5 { font-size: 1.25rem; }
+        .ds-heading--6 { font-size: 1rem; }
+
+        /* Text Styles */
+        .ds-text {
+            font-family: inherit;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .ds-text--color-muted { color: #757575; }
+        .ds-text--color-primary { color: #2196f3; }
+
+        /* Link Styles */
+        .ds-link {
+            color: #2196f3;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+        }
+
+        .ds-link:hover {
+            color: #1976d2;
+            text-decoration: underline;
+        }
+
+        /* Card Styles */
+        .ds-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+        }
+
+        .ds-card--elevated {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .ds-card--clickable:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            cursor: pointer;
+        }
+
+        /* Badge Styles */
+        .ds-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            border-radius: 9999px;
+            white-space: nowrap;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .ds-badge--primary { background-color: #e3f2fd; color: #1565c0; }
+        .ds-badge--success { background-color: #e8f5e9; color: #2e7d32; }
+        .ds-badge--error { background-color: #ffebee; color: #c62828; }
+        .ds-badge--warning { background-color: #fff3e0; color: #ef6c00; }
+        .ds-badge--info { background-color: #e1f5fe; color: #0277bd; }
+
+        /* Alert Styles */
+        .ds-alert {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid;
+            margin: 1rem 0;
+        }
+
+        .ds-alert--info {
+            background-color: #e1f5fe;
+            border-left-color: #03a9f4;
+            color: #01579b;
+        }
+
+        .ds-alert--success {
+            background-color: #e8f5e9;
+            border-left-color: #4caf50;
+            color: #1b5e20;
+        }
+
+        .ds-alert--warning {
+            background-color: #fff3e0;
+            border-left-color: #ff9800;
+            color: #e65100;
+        }
+
+        .ds-alert--error {
+            background-color: #ffebee;
+            border-left-color: #f44336;
+            color: #b71c1c;
+        }
+
+        .ds-alert__icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        /* Form Field */
+        .ds-form-field {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+
+        .ds-form-field__helper {
+            margin-top: 0.375rem;
+            font-size: 0.875rem;
+            color: #757575;
+        }
+
+        /* Hero Styles */
+        .ds-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 1.5rem;
+            text-align: center;
+        }
+
+        .ds-hero h1 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .ds-hero p {
+            color: white;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .ds-hero .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Color Swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .color-swatch {
+            text-align: center;
+        }
+
+        .color-box {
+            height: 80px;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .color-label {
+            font-size: 0.875rem;
+            color: #757575;
+        }
+
+        @media (max-width: 768px) {
+            .showcase-header h1 {
+                font-size: 2rem;
+            }
+
+            .showcase-section {
+                padding: 1.5rem;
+            }
+
+            .component-demo {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="showcase">
+        <!-- Showcase Header -->
+        <div class="showcase-header">
+            <h1>⚛️ Atomic Design System</h1>
+            <p>Component Showcase - Built on Brad Frost's Atomic Design Principles</p>
+        </div>
+
+        <!-- Sticky Navigation -->
+        <nav class="showcase-nav">
+            <ul>
+                <li><a href="#tokens">Design Tokens</a></li>
+                <li><a href="#atoms">Atoms</a></li>
+                <li><a href="#molecules">Molecules</a></li>
+                <li><a href="#organisms">Organisms</a></li>
+                <li><a href="#templates">Templates</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="showcase-container">
+
+            <!-- Design Tokens Section -->
+            <section id="tokens" class="showcase-section">
+                <h2>Design Tokens</h2>
+                <p>The foundation of the design system - colors, typography, spacing, and more.</p>
+
+                <h3>Colors</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-box" style="background-color: #2196f3;"></div>
+                        <div class="color-label">Primary</div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-box" style="background-color: #9c27b0;"></div>
+                        <div class="color-label">Secondary</div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-box" style="background-color: #4caf50;"></div>
+                        <div class="color-label">Success</div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-box" style="background-color: #f44336;"></div>
+                        <div class="color-label">Error</div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-box" style="background-color: #ff9800;"></div>
+                        <div class="color-label">Warning</div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-box" style="background-color: #03a9f4;"></div>
+                        <div class="color-label">Info</div>
+                    </div>
+                </div>
+
+                <h3>Typography</h3>
+                <div class="component-demo">
+                    <div style="margin-bottom: 1rem; font-size: 0.75rem;">Font Size: XS (12px)</div>
+                    <div style="margin-bottom: 1rem; font-size: 0.875rem;">Font Size: SM (14px)</div>
+                    <div style="margin-bottom: 1rem; font-size: 1rem;">Font Size: Base (16px)</div>
+                    <div style="margin-bottom: 1rem; font-size: 1.125rem;">Font Size: LG (18px)</div>
+                    <div style="margin-bottom: 1rem; font-size: 1.25rem;">Font Size: XL (20px)</div>
+                    <div style="font-size: 1.5rem;">Font Size: 2XL (24px)</div>
+                </div>
+            </section>
+
+            <!-- Atoms Section -->
+            <section id="atoms" class="showcase-section">
+                <h2>Atoms</h2>
+                <p>Basic building blocks - the smallest functional components.</p>
+
+                <h3>Buttons</h3>
+                <div class="component-demo">
+                    <div style="margin-bottom: 1.5rem;">
+                        <div class="component-label">Variants</div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <button class="ds-button ds-button--primary ds-button--md">Primary</button>
+                            <button class="ds-button ds-button--secondary ds-button--md">Secondary</button>
+                            <button class="ds-button ds-button--outline ds-button--md">Outline</button>
+                            <button class="ds-button ds-button--ghost ds-button--md">Ghost</button>
+                            <button class="ds-button ds-button--danger ds-button--md">Danger</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="component-label">Sizes</div>
+                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                            <button class="ds-button ds-button--primary ds-button--sm">Small</button>
+                            <button class="ds-button ds-button--primary ds-button--md">Medium</button>
+                            <button class="ds-button ds-button--primary ds-button--lg">Large</button>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Inputs</h3>
+                <div class="component-demo">
+                    <div style="max-width: 400px;">
+                        <div style="margin-bottom: 1rem;">
+                            <div class="component-label">Default Input</div>
+                            <input type="text" class="ds-input" placeholder="Enter text...">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <div class="component-label">Email Input</div>
+                            <input type="email" class="ds-input" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <div class="component-label">Password Input</div>
+                            <input type="password" class="ds-input" placeholder="••••••••">
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Headings</h3>
+                <div class="component-demo">
+                    <h1 class="ds-heading ds-heading--1">Heading 1</h1>
+                    <h2 class="ds-heading ds-heading--2">Heading 2</h2>
+                    <h3 class="ds-heading ds-heading--3">Heading 3</h3>
+                    <h4 class="ds-heading ds-heading--4">Heading 4</h4>
+                    <h5 class="ds-heading ds-heading--5">Heading 5</h5>
+                    <h6 class="ds-heading ds-heading--6">Heading 6</h6>
+                </div>
+
+                <h3>Text & Links</h3>
+                <div class="component-demo">
+                    <p class="ds-text">This is default text with normal styling.</p>
+                    <p class="ds-text ds-text--color-muted">This is muted text for secondary information.</p>
+                    <p class="ds-text ds-text--color-primary">This is primary colored text.</p>
+                    <p><a href="#" class="ds-link">This is a link</a> in a paragraph.</p>
+                </div>
+            </section>
+
+            <!-- Molecules Section -->
+            <section id="molecules" class="showcase-section">
+                <h2>Molecules</h2>
+                <p>Simple combinations of atoms that work together as a unit.</p>
+
+                <h3>Form Fields</h3>
+                <div class="component-demo">
+                    <div style="max-width: 400px;">
+                        <div class="ds-form-field">
+                            <label class="ds-label">
+                                Email Address
+                                <span class="ds-label__required">*</span>
+                            </label>
+                            <input type="email" class="ds-input" placeholder="your@email.com">
+                            <div class="ds-form-field__helper">We'll never share your email with anyone.</div>
+                        </div>
+
+                        <div class="ds-form-field">
+                            <label class="ds-label">Password</label>
+                            <input type="password" class="ds-input" placeholder="••••••••">
+                            <div class="ds-form-field__helper">Must be at least 8 characters.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Cards</h3>
+                <div class="component-grid">
+                    <div class="ds-card">
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">Default Card</h4>
+                        <p class="ds-text ds-text--color-muted">Simple card with default styling.</p>
+                    </div>
+
+                    <div class="ds-card ds-card--elevated">
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">Elevated Card</h4>
+                        <p class="ds-text ds-text--color-muted">Card with shadow elevation.</p>
+                    </div>
+
+                    <div class="ds-card ds-card--elevated ds-card--clickable">
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">Clickable Card</h4>
+                        <p class="ds-text ds-text--color-muted">Hover to see interaction.</p>
+                    </div>
+                </div>
+
+                <h3>Badges</h3>
+                <div class="component-demo">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <span class="ds-badge ds-badge--primary">Primary</span>
+                        <span class="ds-badge ds-badge--success">Success</span>
+                        <span class="ds-badge ds-badge--error">Error</span>
+                        <span class="ds-badge ds-badge--warning">Warning</span>
+                        <span class="ds-badge ds-badge--info">Info</span>
+                    </div>
+                </div>
+
+                <h3>Alerts</h3>
+                <div class="component-demo" style="background: white;">
+                    <div class="ds-alert ds-alert--info">
+                        <span class="ds-alert__icon">ℹ</span>
+                        <div>
+                            <strong>Info:</strong> This is an informational alert message.
+                        </div>
+                    </div>
+
+                    <div class="ds-alert ds-alert--success">
+                        <span class="ds-alert__icon">✓</span>
+                        <div>
+                            <strong>Success:</strong> Your changes have been saved successfully!
+                        </div>
+                    </div>
+
+                    <div class="ds-alert ds-alert--warning">
+                        <span class="ds-alert__icon">⚠</span>
+                        <div>
+                            <strong>Warning:</strong> Please review your information before continuing.
+                        </div>
+                    </div>
+
+                    <div class="ds-alert ds-alert--error">
+                        <span class="ds-alert__icon">✕</span>
+                        <div>
+                            <strong>Error:</strong> Something went wrong. Please try again.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Organisms Section -->
+            <section id="organisms" class="showcase-section">
+                <h2>Organisms</h2>
+                <p>Complex components composed of multiple molecules and atoms.</p>
+
+                <h3>Hero Section</h3>
+                <div class="component-demo" style="padding: 0; background: transparent; border: none;">
+                    <div class="ds-hero">
+                        <h1 class="ds-heading ds-heading--1">Build Faster with Our Design System</h1>
+                        <p>A comprehensive design system that helps designers and developers create consistent, beautiful interfaces.</p>
+                        <div class="button-group">
+                            <button class="ds-button ds-button--primary ds-button--lg">Get Started</button>
+                            <button class="ds-button ds-button--outline ds-button--lg" style="border-color: white; color: white;">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Feature Cards</h3>
+                <div class="component-grid">
+                    <div class="ds-card ds-card--elevated">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚛️</div>
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">Atomic Design</h4>
+                        <p class="ds-text ds-text--color-muted">Built on Brad Frost's proven methodology for scalable design systems.</p>
+                    </div>
+
+                    <div class="ds-card ds-card--elevated">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎨</div>
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">Design Tokens</h4>
+                        <p class="ds-text ds-text--color-muted">Consistent design language with reusable tokens for colors, spacing, and typography.</p>
+                    </div>
+
+                    <div class="ds-card ds-card--elevated">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">TypeScript First</h4>
+                        <p class="ds-text ds-text--color-muted">Fully typed components for better developer experience and fewer bugs.</p>
+                    </div>
+
+                    <div class="ds-card ds-card--elevated">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📱</div>
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">Responsive</h4>
+                        <p class="ds-text ds-text--color-muted">Mobile-first components that work seamlessly across all devices.</p>
+                    </div>
+                </div>
+
+                <h3>Contact Form Example</h3>
+                <div class="component-demo">
+                    <form style="max-width: 500px;">
+                        <div class="ds-form-field">
+                            <label class="ds-label">
+                                Name
+                                <span class="ds-label__required">*</span>
+                            </label>
+                            <input type="text" class="ds-input" placeholder="Your name">
+                        </div>
+
+                        <div class="ds-form-field">
+                            <label class="ds-label">
+                                Email
+                                <span class="ds-label__required">*</span>
+                            </label>
+                            <input type="email" class="ds-input" placeholder="your@email.com">
+                        </div>
+
+                        <div class="ds-form-field">
+                            <label class="ds-label">
+                                Subject
+                                <span class="ds-label__required">*</span>
+                            </label>
+                            <input type="text" class="ds-input" placeholder="What is this about?">
+                        </div>
+
+                        <div class="ds-form-field">
+                            <label class="ds-label">
+                                Message
+                                <span class="ds-label__required">*</span>
+                            </label>
+                            <textarea class="ds-input" rows="5" placeholder="Your message..." style="resize: vertical;"></textarea>
+                        </div>
+
+                        <button type="submit" class="ds-button ds-button--primary ds-button--lg" style="width: 100%;">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Templates Section -->
+            <section id="templates" class="showcase-section">
+                <h2>Templates</h2>
+                <p>Page-level layouts that combine organisms, molecules, and atoms.</p>
+
+                <h3>Available Templates</h3>
+                <div class="component-grid">
+                    <div class="ds-card ds-card--elevated">
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">Main Layout</h4>
+                        <p class="ds-text ds-text--color-muted">Standard page layout with header, content area, and footer.</p>
+                        <span class="ds-badge ds-badge--info" style="margin-top: 1rem;">Template</span>
+                    </div>
+
+                    <div class="ds-card ds-card--elevated">
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">Dashboard Layout</h4>
+                        <p class="ds-text ds-text--color-muted">Dashboard with collapsible sidebar navigation and main content area.</p>
+                        <span class="ds-badge ds-badge--info" style="margin-top: 1rem;">Template</span>
+                    </div>
+
+                    <div class="ds-card ds-card--elevated">
+                        <h4 class="ds-heading ds-heading--4" style="margin-bottom: 0.5rem;">Auth Layout</h4>
+                        <p class="ds-text ds-text--color-muted">Centered authentication layout for login and registration pages.</p>
+                        <span class="ds-badge ds-badge--info" style="margin-top: 1rem;">Template</span>
+                    </div>
+                </div>
+
+                <div class="ds-alert ds-alert--info">
+                    <span class="ds-alert__icon">ℹ</span>
+                    <div>
+                        <strong>Note:</strong> The actual React/TypeScript components in <code>src/templates/</code> provide full layout implementations with header, footer, and responsive behavior.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Component Summary -->
+            <section class="showcase-section">
+                <h2>Component Summary</h2>
+                <p>Complete overview of all available components in the design system.</p>
+
+                <div class="component-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div class="ds-card">
+                        <h4 class="ds-heading ds-heading--5" style="margin-bottom: 0.5rem; color: #2196f3;">Design Tokens</h4>
+                        <ul style="list-style: none; color: #757575; font-size: 0.875rem; line-height: 1.8;">
+                            <li>✓ Colors</li>
+                            <li>✓ Typography</li>
+                            <li>✓ Spacing</li>
+                            <li>✓ Shadows</li>
+                            <li>✓ Border Radius</li>
+                            <li>✓ Breakpoints</li>
+                        </ul>
+                    </div>
+
+                    <div class="ds-card">
+                        <h4 class="ds-heading ds-heading--5" style="margin-bottom: 0.5rem; color: #2196f3;">Atoms</h4>
+                        <ul style="list-style: none; color: #757575; font-size: 0.875rem; line-height: 1.8;">
+                            <li>✓ Button</li>
+                            <li>✓ Input</li>
+                            <li>✓ Label</li>
+                            <li>✓ Heading</li>
+                            <li>✓ Text</li>
+                            <li>✓ Link</li>
+                        </ul>
+                    </div>
+
+                    <div class="ds-card">
+                        <h4 class="ds-heading ds-heading--5" style="margin-bottom: 0.5rem; color: #2196f3;">Molecules</h4>
+                        <ul style="list-style: none; color: #757575; font-size: 0.875rem; line-height: 1.8;">
+                            <li>✓ FormField</li>
+                            <li>✓ Card</li>
+                            <li>✓ Badge</li>
+                            <li>✓ Alert</li>
+                            <li>✓ SearchBar</li>
+                        </ul>
+                    </div>
+
+                    <div class="ds-card">
+                        <h4 class="ds-heading ds-heading--5" style="margin-bottom: 0.5rem; color: #2196f3;">Organisms</h4>
+                        <ul style="list-style: none; color: #757575; font-size: 0.875rem; line-height: 1.8;">
+                            <li>✓ Header</li>
+                            <li>✓ Footer</li>
+                            <li>✓ Hero</li>
+                            <li>✓ ContactForm</li>
+                        </ul>
+                    </div>
+
+                    <div class="ds-card">
+                        <h4 class="ds-heading ds-heading--5" style="margin-bottom: 0.5rem; color: #2196f3;">Templates</h4>
+                        <ul style="list-style: none; color: #757575; font-size: 0.875rem; line-height: 1.8;">
+                            <li>✓ MainLayout</li>
+                            <li>✓ DashboardLayout</li>
+                            <li>✓ AuthLayout</li>
+                        </ul>
+                    </div>
+
+                    <div class="ds-card">
+                        <h4 class="ds-heading ds-heading--5" style="margin-bottom: 0.5rem; color: #2196f3;">Pages</h4>
+                        <ul style="list-style: none; color: #757575; font-size: 0.875rem; line-height: 1.8;">
+                            <li>✓ HomePage</li>
+                            <li>✓ DashboardPage</li>
+                            <li>✓ LoginPage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ds-alert ds-alert--success" style="margin-top: 2rem;">
+                    <span class="ds-alert__icon">✓</span>
+                    <div>
+                        <strong>Ready to use!</strong> All components are built with React + TypeScript and can be imported from <code>@design-system/core</code>. Check the documentation files for detailed usage instructions.
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer style="background: white; border-top: 1px solid #e0e0e0; padding: 2rem 1.5rem; text-align: center; color: #757575;">
+            <p>Built with ⚛️ Atomic Design Principles by Brad Frost</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+                View the full source code in the <code>src/</code> directory
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('.showcase-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active state to nav links on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.showcase-section');
+            const navLinks = document.querySelectorAll('.showcase-nav a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.backgroundColor = '';
+                link.style.color = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.backgroundColor = '#e3f2fd';
+                    link.style.color = '#2196f3';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
