@@ -56,6 +56,15 @@ function App() {
 }
 ```
 
+## 🎨 Preview Showcase
+
+View all components in your browser:
+
+- **[showcase-extended.html](showcase-extended.html)** - Complete showcase with all 34+ components (v1.1)
+- **[showcase.html](showcase.html)** - Original showcase with core components (v1.0)
+
+Simply open either HTML file in your web browser to see interactive examples of all components with live demos, hover effects, and working interactions!
+
 ## Documentation
 
 - **[Quick Start Guide](QUICK_START.md)** - Get started in minutes
