@@ -1,0 +1,141 @@
+.ds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.ds-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.3);
+}
+
+.ds-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Sizes */
+.ds-button--sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.ds-button--md {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.ds-button--lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+}
+
+/* Variants */
+.ds-button--primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.ds-button--primary:hover:not(:disabled) {
+  background-color: #1976d2;
+}
+
+.ds-button--primary:active:not(:disabled) {
+  background-color: #1565c0;
+}
+
+.ds-button--secondary {
+  background-color: #9c27b0;
+  color: white;
+}
+
+.ds-button--secondary:hover:not(:disabled) {
+  background-color: #7b1fa2;
+}
+
+.ds-button--secondary:active:not(:disabled) {
+  background-color: #6a1b9a;
+}
+
+.ds-button--outline {
+  background-color: transparent;
+  border: 2px solid #2196f3;
+  color: #2196f3;
+}
+
+.ds-button--outline:hover:not(:disabled) {
+  background-color: #e3f2fd;
+}
+
+.ds-button--outline:active:not(:disabled) {
+  background-color: #bbdefb;
+}
+
+.ds-button--ghost {
+  background-color: transparent;
+  color: #2196f3;
+}
+
+.ds-button--ghost:hover:not(:disabled) {
+  background-color: #e3f2fd;
+}
+
+.ds-button--ghost:active:not(:disabled) {
+  background-color: #bbdefb;
+}
+
+.ds-button--danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.ds-button--danger:hover:not(:disabled) {
+  background-color: #d32f2f;
+}
+
+.ds-button--danger:active:not(:disabled) {
+  background-color: #c62828;
+}
+
+/* Full width */
+.ds-button--full-width {
+  width: 100%;
+}
+
+/* Loading */
+.ds-button--loading {
+  pointer-events: none;
+}
+
+.ds-button__spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ds-button-spin 0.6s linear infinite;
+}
+
+@keyframes ds-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ds-button__icon-left,
+.ds-button__icon-right {
+  display: inline-flex;
+  align-items: center;
+}

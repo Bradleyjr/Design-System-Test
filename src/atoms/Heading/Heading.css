@@ -1,0 +1,59 @@
+.ds-heading {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  color: #212121;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.ds-heading--1 {
+  font-size: 3rem;
+  letter-spacing: -0.025em;
+}
+
+.ds-heading--2 {
+  font-size: 2.25rem;
+  letter-spacing: -0.025em;
+}
+
+.ds-heading--3 {
+  font-size: 1.875rem;
+}
+
+.ds-heading--4 {
+  font-size: 1.5rem;
+}
+
+.ds-heading--5 {
+  font-size: 1.25rem;
+}
+
+.ds-heading--6 {
+  font-size: 1rem;
+}
+
+.ds-heading--align-left {
+  text-align: left;
+}
+
+.ds-heading--align-center {
+  text-align: center;
+}
+
+.ds-heading--align-right {
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .ds-heading--1 {
+    font-size: 2.25rem;
+  }
+
+  .ds-heading--2 {
+    font-size: 1.875rem;
+  }
+
+  .ds-heading--3 {
+    font-size: 1.5rem;
+  }
+}

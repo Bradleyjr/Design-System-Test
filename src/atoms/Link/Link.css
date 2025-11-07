@@ -1,0 +1,68 @@
+.ds-link {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ds-link:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.3);
+  border-radius: 0.25rem;
+}
+
+/* Variants */
+.ds-link--default {
+  color: #2196f3;
+}
+
+.ds-link--default:hover {
+  color: #1976d2;
+}
+
+.ds-link--default:active {
+  color: #1565c0;
+}
+
+.ds-link--subtle {
+  color: #757575;
+}
+
+.ds-link--subtle:hover {
+  color: #424242;
+}
+
+.ds-link--primary {
+  color: #2196f3;
+  font-weight: 500;
+}
+
+.ds-link--primary:hover {
+  color: #1976d2;
+}
+
+/* Underline styles */
+.ds-link--underline-always {
+  text-decoration: underline;
+}
+
+.ds-link--underline-hover {
+  text-decoration: none;
+}
+
+.ds-link--underline-hover:hover {
+  text-decoration: underline;
+}
+
+.ds-link--underline-none {
+  text-decoration: none;
+}
+
+/* External icon */
+.ds-link__external-icon {
+  font-size: 0.875em;
+  opacity: 0.7;
+}

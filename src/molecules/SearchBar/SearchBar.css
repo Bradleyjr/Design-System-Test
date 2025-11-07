@@ -1,0 +1,9 @@
+.ds-search-bar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.ds-search-bar__button {
+  flex-shrink: 0;
+}
